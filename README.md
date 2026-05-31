@@ -29,10 +29,14 @@ Criar uma aplicação que permita:
 
 ### Backend
 - Python 3.14
+<<<<<<< HEAD
 - Flask 3.1.2
+=======
+- Flask
+>>>>>>> f5cca84b1c15f7894352e82b3f5c420e18f8bbe3
 
 ### Base de Dados
-- PostgreSQL 18
+- SQLite 
 
 ### Frontend
 - HTML5
@@ -91,8 +95,8 @@ Representação da lógica do domínio e estrutura das classes principais do sis
 
 ## Stack Tecnológico (Resumo)
 
-- Backend: Python + FastAPI  
-- Base de Dados: PostgreSQL  
+- Backend: Python + Flask  
+- Base de Dados: SQLite
 - Frontend: HTML, CSS, JavaScript + Bootstrap  
 - Versionamento: Git + GitHub  
 
