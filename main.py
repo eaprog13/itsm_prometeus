@@ -1,4 +1,4 @@
-"Teste de commit inicial"
+"Teste do commit inicial"
 
 a = 20
 soma = 2
