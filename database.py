@@ -1,1 +1,3 @@
-print(f"Instância do SQL")
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
