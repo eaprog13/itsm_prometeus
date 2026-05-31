@@ -1,0 +1,9 @@
+/*=============================
+8 - CURSOR & INTERAÇÃO
+=============================*/
+button, a {
+cursor: pointer; /* indica que é clicável */
+}
+.hover-effect:hover {
+transform: scale(1.05); /* efeito visual */
+}

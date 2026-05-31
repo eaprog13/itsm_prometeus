@@ -1,0 +1,165 @@
+/*
+=====================================================
+ DICIONÁRIO COMPLETO DE HTML – COMENTADO
+ Propósito: Explicar cada elemento/tópico, seu uso e exemplos práticos
+=====================================================
+*/
+Usa section para significado, div para layout.
+O form já é semântico por si.
+/*=============================
+1 - ESTRUTURA BÁSICA DE UM DOCUMENTO HTML
+ Definição: Estrutura mínima que todo documento HTML deve ter.
+ Uso: Organiza o HTML em raiz, metadados e conteúdo visível.
+ Elementos: <!DOCTYPE html>, <html>, <head>, <body>
+ Exemplo: */
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8"> <!-- Define codificação de caracteres -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade -->
+    <title>Exemplo HTML</title> <!-- Título da página -->
+</head>
+<body> <!-- Conteúdo visível ao usuário -->
+
+/*=============================
+2 - ELEMENTOS DE TEXTO
+ Definição: Estruturas para exibir e organizar conteúdo textual.
+ Uso: Cabeçalhos, parágrafos, destaques, itálico e quebras de linha.
+ Exemplos: <h1> a <h6>, <p>, <strong>, <em>, <br>
+*/
+<h1>Título Principal</h1>
+<h2>Subtítulo</h2>
+<p>Este é um parágrafo de exemplo.</p>
+<p>Texto <strong>importante</strong> em negrito.</p>
+<p>Texto <em>em destaque</em> em itálico.</p>
+<p>Linha1<br>Linha2</p>
+
+/*=============================
+3 - LINKS E IMAGENS
+ Definição: Inserir hiperlinks e imagens.
+ Uso: <a> cria links; <img> exibe imagens.
+ Exemplos: */
+<a href="https://www.google.com" target="_blank">Acessar Google</a>
+<img src="imagem.jpg" alt="Descrição da imagem" width="200">
+
+/*=============================
+4 - LISTAS
+ Definição: Agrupar itens de forma ordenada ou não.
+ Uso: <ul>/<ol> com <li> para itens.
+ Exemplos: */
+<ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+</ul>
+<ol>
+    <li>Primeiro</li>
+    <li>Segundo</li>
+</ol>
+
+/*=============================
+5 - TABELAS
+ Definição: Organizar dados em linhas e colunas.
+ Uso: <table> com <thead>, <tbody>, <tfoot>, <tr>, <th>, <td>
+ Exemplos: */
+<table border="1">
+    <thead>
+        <tr><th>Nome</th><th>Idade</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>Ana</td><td>25</td></tr>
+        <tr><td>João</td><td>30</td></tr>
+    </tbody>
+    <tfoot>
+        <tr><td>Total</td><td>2</td></tr>
+    </tfoot>
+</table>
+
+/*=============================
+6 - FORMULÁRIOS
+ Definição: Coletar dados do usuário.
+ Uso: Inputs, selects, textareas e botões para envio.
+ Exemplos: */
+<form action="/submit" method="post">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" placeholder="Digite seu nome">
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" placeholder="Digite seu email">
+
+    <label for="idade">Idade:</label>
+    <input type="number" id="idade" name="idade" min="0" max="120">
+
+    <label>Sexo:</label>
+    <input type="radio" id="masc" name="sexo" value="masc">
+    <label for="masc">Masculino</label>
+    <input type="radio" id="fem" name="sexo" value="fem">
+    <label for="fem">Feminino</label>
+
+    <label for="interesse">Interesse:</label>
+    <select id="interesse" name="interesse">
+        <option value="design">Design</option>
+        <option value="programacao">Programação</option>
+    </select>
+
+    <textarea name="mensagem" placeholder="Mensagem..."></textarea>
+
+    <button type="submit">Enviar</button>
+</form>
+
+/*=============================
+7 - ELEMENTOS DE SEÇÃO E ORGANIZAÇÃO
+ Definição: Estruturas semânticas para organizar conteúdo.
+ Uso: Cabeçalho, rodapé, navegação, seções e artigos.
+ Exemplos: <header>, <footer>, <main>, <section>, <article>, <aside>, <nav>
+*/
+<header><h1>Cabeçalho</h1></header>
+<nav>Menu de navegação</nav>
+<main>
+    <section>Seção principal</section>
+    <article>Artigo ou conteúdo principal</article>
+</main>
+<aside>Barra lateral</aside>
+<footer>Rodapé</footer>
+
+/*=============================
+8 - ELEMENTOS MULTIMÍDIA
+ Definição: Inserção de conteúdo audiovisual.
+ Uso: Vídeos e áudios.
+ Exemplos: <video>, <audio>
+*/
+<video width="320" controls>
+  <source src="video.mp4" type="video/mp4">
+  Seu navegador não suporta vídeo.
+</video>
+<audio controls>
+  <source src="audio.mp3" type="audio/mpeg">
+  Seu navegador não suporta áudio.
+</audio>
+
+/*=============================
+9 - ELEMENTOS SEMÂNTICOS ADICIONAIS
+ Definição: Elementos que adicionam significado ao conteúdo.
+ Uso: Destacar informações, legendas, códigos.
+ Exemplos: <figure>, <figcaption>, <mark>, <code>
+*/
+<figure>
+  <img src="foto.jpg" alt="Descrição">
+  <figcaption>Legenda da imagem</figcaption>
+</figure>
+<p>Este é um texto <mark>importante</mark>.</p>
+<p>Exemplo de <code>console.log('Olá')</code> no texto.</p>
+
+/*=============================
+10 - META E LINKS IMPORTANTES
+ Definição: Metadados e referências externas.
+ Uso: Configurar charset, viewport, CSS e outros links.
+ Exemplos: <meta>, <link>
+*/
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+
+/*=============================
+ FIM DO DICIONÁRIO HTML
+=============================*/
+

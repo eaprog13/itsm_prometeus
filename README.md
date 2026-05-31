@@ -29,7 +29,7 @@ Criar uma aplicação que permita:
 
 ### Backend
 - Python 3.14
-- FastAPI
+- Flask 3.1.2
 
 ### Base de Dados
 - PostgreSQL 18
@@ -102,7 +102,7 @@ Representação da lógica do domínio e estrutura das classes principais do sis
 
 Este projeto propõe a criação de uma aplicação para gestão de infraestruturas informáticas, permitindo a gestão de utilizadores, tickets e ativos (hardware e software).
 
-Foi escolhida a stack Python + FastAPI devido à sua simplicidade e proximidade com a sintaxe em aprendizagem. O PostgreSQL foi selecionado por estar alinhado com o contexto académico da unidade de administração de bases de dados.
+Foi escolhida a stack Python + Flask devido à sua simplicidade e proximidade com a sintaxe em aprendizagem. O PostgreSQL foi selecionado por estar alinhado com o contexto académico da unidade de administração de bases de dados.
 
 Inicialmente será utilizado Bootstrap para o frontend, com o objetivo de criar uma interface simples e funcional. Caso necessário, poderá ser substituído por uma aplicação em consola.
 

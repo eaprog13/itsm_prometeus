@@ -1,0 +1,8 @@
+/*=============================
+6 - PSEUDO-CLASSES & PSEUDO-ELEMENTOS
+=============================*/
+a:hover { color: red; } /* hover do mouse */
+input:focus { border-color: var(--cor-primaria); } /* foco */
+p::before { content:'⭐ '; } /* conteúdo antes do elemento */
+p::after { content:' ✨'; } /* conteúdo depois do elemento */
+

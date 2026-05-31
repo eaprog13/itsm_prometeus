@@ -1,0 +1,1 @@
+print(f"Configurações base")

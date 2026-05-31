@@ -1,0 +1,23 @@
+/*=============================
+2 - FLEXBOX & GRID
+=============================*/
+/* Flexbox */
+.flex-container {
+display: flex;
+flex-direction: row; /* linha */
+justify-content: space-between; /* distribuição horizontal */
+align-items: center; /* alinhamento vertical */
+gap: 10px; /* espaçamento entre itens */
+flex-wrap: wrap; /* permite quebra de linha */
+}
+
+
+/* Grid */
+.grid-container {
+display: grid;
+grid-template-columns: 1fr 2fr; /* 2 colunas de proporção */
+grid-template-rows: auto; /* altura automática */
+gap: 10px; /* espaçamento entre células */
+grid-area: main; /* nome da área */
+}
+

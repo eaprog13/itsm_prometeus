@@ -1,0 +1,54 @@
+/*
+=====================================================
+ DICIONÁRIO – SELECTORES CSS
+=====================================================
+*/
+
+/*
+1 - ELEMENT SELECTORS
+   Aplica a todos os elementos do tipo
+*/
+
+h1 {
+  background-color: peru;
+  color: black;
+  text-align: center;
+}
+
+p {
+  padding: 20px;
+  background-color: bisque;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/*
+2 - CLASS SELECTORS
+   Reutilizável em múltiplos elementos
+*/
+
+.dark {
+  background-color: black;
+  color: white;
+}
+
+.light {
+  background-color: white;
+  color: black;
+}
+
+/*
+3 - ID SELECTORS
+   Aplica-se a um elemento específico
+*/
+
+#ul1 {
+  color: peru;
+  text-align: justify;
+}
+
+/*
+4 - SELECTORES COMBINADOS E DESCENDENTES
+   Exemplo: section p {} aplica estilo a p dentro de section
+*/
+

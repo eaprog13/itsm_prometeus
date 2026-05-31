@@ -1,0 +1,14 @@
+/*=============================
+7 - OVERFLOW & SCROLL
+=============================*/
+div.scroll {
+overflow: auto; /* barra de rolagem se necessário */
+max-height: 200px; /* altura máxima */
+}
+p.ellipsis {
+white-space: nowrap; /* sem quebra de linha */
+overflow: hidden; /* esconde conteúdo extra */
+text-overflow: ellipsis; /* reticências */
+}
+
+

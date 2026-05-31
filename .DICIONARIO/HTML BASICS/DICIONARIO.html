@@ -1,0 +1,510 @@
+ <!-- HMTL ELEMENTOS SAO A ESTRUTURA DO DOC.
+ ATRIBUTOS INDICAM COMO ESSES ELEMENTOS COMPORTAM-SE.
+ CSS ESTILIZA A MESMA ESTRUTURA.
+ JAVASCRIPT FORNECE A CONEXÃO SOFISTICADA DE SISTEMAS FORA DO DOC
+ QUANDO TEMOS ELEMENTOS DENTRO DE ELEMENTOS CHAMADO DOM 
+ DIVIDIMOS EM TRES SECCOES
+ PARENT- PRINCIPAL, CHILD- SECUNDÁRIO, SIBLINGS- TERCIARIO-->
+
+ <!--BLOCK ELEMENTS QUE OCUPAM O ESPAÇO HORIZONTAL TODO
+    INLINE ELEMENTS APENAS OCUPAM O ESPAÇO HORIZONTAL QUE NECESSITAM -->   
+    <!--ATRIBUTOS SERVEM PARA ESPECIFICAR O COMPORTAMENTO OU FUNCIONALIDADE
+    DE CADA ELEMENTO-->
+    <!--ALGUNS ATRIBUTOS PRECISAM DE VALOR OUTROS NAO. O CASO DO
+    HREF PRECISA DE VALOR, NO CASO DE DISABLED BUTTON, NAO.
+     EXISTEM TRES GRUPOS GERAIS: 
+     REQUIRED ATRIBUTES NECESSÁRIO PARA COMPLETAR O ATRIBUTO E EXECUTAR
+     O COMPORTAMENTO DO ELEMENTO
+     OPTIONAL ATRIBUTES NÃO NECESSITA DE MAIS NENHUM VALOR PARA ESTAR COMPLETO.
+     EVENT ATRIBUTES QUE SÃO EVENTOS GERADOS PARA O UTILIZADOR OU VINDO DELE
+     TIPO O BOTÃO, OU COMO O MOVIMENTO DO CURSOR DO RATO.  
+    -->    
+
+
+    <!--LAYOUT É A ESTRUTURA VISUAL DA PÁGINA WEB
+    COMO O CONTEÚDO É ORGANIZADO E APRESENTADO NA TELA-->
+    <!--CONTAINER É UM BLOCO QUE AGRUPA ELEMENTOS RELACIONADOS
+    SERVE PARA ORGANIZAR O CONTEÚDO DENTRO DO LAYOUT.-->
+   
+
+    <!--EM PROJECTOS DE TRABALHO VÃO EXISTIR CENTENAS DE ELEMENTOS
+    QUE NÓS PRECISAMOS DE MANTER O FOCO E CONHECIMENTO DE TODOS SABENDO A 
+    LOCALIZAÇÃO EXACTA DELES E PERCEBEMOS QUEM É QUEM E QUE FUNÇÃO TEM NO DOC, 
+    POR INUMERAS RAZOES. UMA DAS RAZÕES É A NECESSIDADE DE DAR TARGET NELES 
+    PARA ESTILIZAR A INFORMAÇÃO. TEMOS A POSSIBILIDADE DE PEDIR AO PROGRAMA
+    PARA MUDAR E O PROGRAMA DA TARGET EM TODOS OS QUE TIVEREM "A T-SHIRT AZUL"
+    E MUDA PARA VERMELHO. ESSE ROBOT PRECISA DE IDENTIFICADORES PARA CONSEGUIR
+    CONCLUIR A TAREFA. -->
+    <!--OS ELEMENTOS IDENTIFICADORES EM HTML SAO IDENTIFIERS
+        OS ELEMENTOS IDENTIFICADORES EM CSS SAO SELECTORS-->
+
+
+
+
+<!--=====================================TAGS PRINCIPAIS DE ESTRUTURACAO DO DOCUMENTO=============================================->
+
+<!DOCTYPE html><!--DEFINE O TIPO DE DOCUMENTO E O PADRAO DE CONFIGURAÇÃO-->
+<html lang="pt-pt"><!-- DEFINE A LINGUA QUE ESTARÁ O DOCUMENTO-->
+<head></head><!-- INFO PARA O MOTOR DE BUSCA E CONFIGURACAO GERAL PARA CARREGAR CSS E JAVASCRIPT-->
+<body></body><!--CORPO DO DOCUMENTO OU SEJA O SEU CONTEUDO-->
+<footer></footer><!--FINAL DO DOC PARA COPYRIGHT E CONTACTOS-->
+
+
+<header></header><!-- CABECALHO DO DOCUMENTO-->
+<nav></nav><!--TAG PARA MENUS DE NAVEGAÇÃO, Área de navegação. 
+contém links de navegação para outras partes do site ou da página-->
+<main></main><!-- É O ELEMENTO FUNDAMENTAL DO DOCUMENTO, TEM O CONTEUDO PRINCIPAL DO CORPO DO DOCUMENTO, UNICO POR DOCUMENTO -->
+<section></section><!-- CONTEM UMA SECÃO GENÉRICA TEMÁTICA AGRUPADA,OU SEJA UM GRUPO DE CONTÉUDO ESPECIFICO, VARIANDO DE H1 A H6-->
+<!--representa uma secção genérica de conteúdo, que pode conter múltiplos artigos ou outras divisões.-->
+<article></article><!-- CONTEUDO INDEPENDETE E REUTILIZAVEL, COMO UM ARTIGO, POST OU PRODUTO 
+define um conteúdo independente e autocontido, como uma notícia, publicação de blogue ou comentário.-->
+<aside></aside><!-- CONTEUDO LATERAL OU COMPLEMENTAR(BARRA LATERAL, ANUNCIOS)
+representa um conteúdo relacionado, mas que pode ser considerado separado do conteúdo principal, como uma barra lateral-->
+<footer></footer><!-- RODAPE DA PAGINA OU SECCAO, PODE CONTER CONTACTOS DIREITOS DE AUTOR,links secundários ETC-->
+<div></div><!-- BLOCO GENERICO USADO PARA AGRUPAR ELEMENTOS QUANDO NAO HA TAG SEMANTICA ESPECIFICA,
+TAG PARA DIVIDIR NUM BLOCO QUE OCUPA TODA A LARGURA DISPONIVEL/
+BLOCO DE CONSTRUÇÃO GENÉRICA PARA AGRUPAR SECOES E CONTAINERS E ORGANIZAR A PAGINA DO DOC-->
+<span></span><!-- ELEMENTO EM LINHA(INLINE) GENÉRICO USADO PARA DESTACAR PARTE DO TEXTO,
+TAG PARA PARA DIVIDIR APENAS EM LINHA INLINE PARA ESTILIZAR PARTES DE TEXTO -->
+<!--AMBOS DIV E SPANS SERVEM COMO CONTAINERS PARA RECEBER ELEMENTOS
+ELES POR SI SÓ NÃO ALTERAM EM NADA O DOC.AJUDAM A AGRUPAR AS COISAS.-->
+
+
+
+
+
+<!--===========================================TAGS DE ORGANIZACAO DE TEXTO=======================================================-->
+<p></p><!--PARAGRAFO-->
+<br><!--QUEBRA DE LINHA-->
+<hr><!--LINHA HORIZONTAL SEPARADOR-->
+<blockquote></blockquote><!--CITACAO LONGA EM BLOCO-->
+<q></q><!--CITACAO CURTA EM LINHA-->
+<pre></pre><!-- TEXTO PRÉ-FORMATADO MANTEM ESPAÇOS E QUEBRAS-->
+<code></code><!-- PEDAÇO DE CÓDIGO-->
+<h1></h1>
+<a target="_blank" href="www.exemplo.com" description="descrição do site">site</a>
+<link rel="stylesheet" href="styles.css"><!--LINKAS O CSS OU OUTRA FONTE-->
+<title>Teste de CSS Basico</title><!-- TAGA PARA DAR TÍTULO NA DESCRIÇÃO DO SEPARADOR-->
+
+
+
+
+
+<!--========================================TAGS PRINCIPAIS DE FORMATACAO==========================================================-->
+<b></b><!--NEGRITO SEM ENFASE SEMANTICA aplica negrito ao texto, usado para destacar partes específicas-->
+<strong></strong><!--TEXTO IMPORTANTE COM ENFASE indica ênfase forte ou importância, geralmente renderizado como negrito.-->
+<i></i><!--ITALICO SEM ENFASE aplica itálico ao texto, geralmente usado para nomes de obras, estrangeirismos ou ênfase leve.-->
+<em></em><!--ENFASE SEMANTICA EQUIVALE AO ITALICO indica ênfase, geralmente renderizado como itálico.-->
+<u></u><!--SUBLINHADO-->
+<mark></mark><!--TEXTO DESTACADO destaca o texto, geralmente com um fundo colorido.-->
+<small></small><!--TEXTO MENOR reduz o tamanho do texto, usado para avisos ou notas secundárias.-->
+<del></del><!--TEXTO ELIMINADO-->
+<ins></ins><!--TEXTO INSERIDO-->
+<sub></sub><!--SUBSCRITO-->
+<sup></sup><!--SOBRESCRITO-->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet"><!--PUXAR AS FONTES ATRAVÉS DO GOOGLE DIRECTAMENTE NO HTML-->
+<!-- SEGUNDA OPCAO PEDIR ATRAVÉS DO CSS -->
+
+
+
+
+<!--=======================================TAGS PRINCIPAIS DE MULTIMEDIA============================================================-->
+<img src="imagem.jpg" alt="descricao da imagem" width="400" height="300"><!-- INSERCAO DE IMG usado para inserir imagens. Possui atributos como src (fonte da imagem) e alt (texto alternativo)-->
+<!-- SRC= CAMINHO URL DA IMAGEM-->
+<!-- ALT= TEXTO ALTERNATIVO CASO NAO APARECA A IMAGEM-->
+<!-- WIDTH E HEIGHT = TAMANHO E LARGURA-->
+<audio controls><!-- TAG PARA AUDIO usado para incorporar áudio. Pode incluir atributos como controls para exibir controlos de reprodução-->
+  <source src="musica.mp3"  type="audio/mpeg">  
+</audio>
+<!-- CONTROLS - MOSTRA OS CONTROLOS(PLAY,PAUSE,VOLUME)-->
+<!-- AUTOPLAY - REPRODUZ AUTOMATICAMENT AO CARREGAR A PAGINA-->
+<!-- LOOP - REPETE O AUDIO AUTOMATICAMENTE-->
+<!-- MUTED - INICIA O AUDIO SEM SOM-->
+<!-- PRELOAD - CONTRLA O PRE CARREGAMENTO DO FICHEIRO (NONE,METADATA,AUTO)-->
+<video  width="640" height="360" controls><!--TAG PARA VIDEO usado para incorporar vídeo. Pode incluir atributos como controls, width, height, autoplay e loop-->
+  <source src="video.mp4" type="video/mp4">
+</video>
+<!-- CONTROLS - MOSTRA OS CONTROLOS(PLAY,PAUSE,VOLUME)-->
+<!-- AUTOPLAY - REPRODUZ AUTOMATICAMENT AO CARREGAR A PAGINA-->
+<!-- LOOP - REPETE O AUDIO AUTOMATICAMENTE-->
+<!-- MUTED - INICIA O AUDIO SEM SOM-->
+<!-- POSTER - IMAGEM ANTES DO VIDEO COMECAR(POSTER="capa.jpg")-->
+<!-- PRELOAD - CONTRLA O PRE CARREGAMENTO DO FICHEIRO (NONE,METADATA,AUTO)--> 
+<!-- TITLE - TEXTO QUE APARECE AO PASSAR O RATO-->
+
+
+
+
+
+
+<!--===============================================TAGS DE LISTAGEM=================================================================-->
+
+<ul type="circle,square,disc"></ul><!-- PARA LISTAS GENERICAS lista não ordenada, com marcadores para cada item (<li>)-->
+<!-- TYPE DEFINE O ESTILO DE MARCADOR NO CSS-->
+<ol type="1,A,a,I,i"></ol><!-- PARA LISTAS ORGANIZADAS COM PASSOS OU HIERARQUIA lista ordenada, com números ou letras para cada item -->
+<!-- TYPE DEFINE O TIPO DE NUMERACAO USADA-->
+<!-- START DEFINE O NUMERO INICIAL-->
+<!-- REVERSED INVERTE A ORDEM, CONTA DE TRÁS PARA A FRENTE -->
+<li></li><!-- REPRESENTA A LISTA DO ITEM define um item dentro de uma lista-->
+<dl></dl><!-- PARA GLOSSARIOS OU DEFINICOES LISTA DE DEFINICAO ENVOLVE TODA A LISTA lista de definição, usada para pares de termos e descrições-->
+<dt></dt><!-- DEFINE O TERMO termo de definição dentro de uma lista de definição-->
+<dd></dd><!-- DEFINE A DESCRICAO descrição de definição dentro de uma lista de definição-->
+<!-- RELEMBRAR QUE SE PODE FAZER LISTA DENTRO DE LISTA-->
+<!--FORMATAR O ESTILO DOS MARCADORES COM CSS(LIST-STYLE-TYPE,STYLE-IMAGEM ENTRE OUTROS)-->
+
+
+
+
+
+
+<!--================================================TAGS DE TABELA======================================================================= -->
+
+<table border="1" align="center" width="100%" height="100%"></table><!--DEFINE O INICIO E FIM DA TABELA-->
+<!-- BORDER CRIA UMA LINHA EM VOLTA-->
+<!-- ALIGN ALINHAMENTO DO CONTEUDO PARA USAR EM TABLE TR E TD-->
+<!-- WIDTH E HEIGHT PARA DEFINIR AS DIMENSOES TABLE OU TD, USAR SEMPRE O FICHEIRO CSS-->
+<tr></tr><!--TABLE ROW DEFINE UMA LINHA-->
+<th colspan="2"></th><!--TABLE HEADER DEFINE UMA CELULA DE CABECALHO(EM NEGRITO E CENTRADA POR PADRAO)-->
+<!-- FAZ A CELULA OCUPAR VARIAS COLUNAS PARA USAR EM TH OU TD-->
+<td rowspan="3"></td><!--TABLE DATA DEFINE UMA CELULA DE DADOS-->
+<!-- FAZ A CELULA OCUPAR VARIAS LINHAS PARA USAR EM TH OU TD-->
+<caption></caption><!--CAPTION ADICIONA UM TITULO A TABELA-->
+<thead></thead><!-- TABLE HEAD AGRUPA O CABECALHO DA TABELA-->
+<tbody></tbody><!-- TABLE BODY AGRUPA O CORPOA CONTEUDO PRINCIPAL-->
+<tfoot></tfoot><!-- TABLE FOOTER AGRUPA O RODAPE DA TABELA(USADO PARA TOTAIS,NOTAS,ETC)-->
+<colgroup></colgroup> e <col><!--COLUMN GROUP PERMITEM APLICAR ESTILOS A COLUNAS INTEIRAS-->
+<!--
+Use <th> sempre para cabeçalhos — melhora acessibilidade e SEO.
+Use <caption> para identificar a tabela.
+Use CSS para bordas, cores e alinhamentos (não atributos HTML antigos).
+Combine <thead>, <tbody>, <tfoot> para tabelas grandes 
+ou dinâmicas (especialmente úteis em tabelas interativas com JavaScript).
+-->
+
+
+
+
+<!--===========================================TAGS DE FORMULÁRIO================================================================= -->
+
+<form></form><!-- FORMULÁRIO - ENVOLVE TODOS OS CAMPOS E DEFINE ONDE E COMO OS DADOS SERAO ENVIADOS define o formulário -->
+<label></label><!-- RÓTULO - IDENTIFICA O CAMPO DE ENTRADA(MELHOR ACESSIBILIDADE)-->
+<input><!--CAMPO DE ENTRADA - CRIA CAMPOS DE TEXTO,BOTOES,CAIXAS,ETC) campo de entrada, com tipos variados (text, password, email, etc. -->
+<textarea></textarea><!-- AREA DE TEXTO CAMPO PARA TEXTOS LONGOS área de texto para entrada de múltiplas linhas.-->
+<select></select><!-- MENU SUSPENSO - CRIA LISTAS DE SELECAO (DROPDOWN)  lista de opções suspensa-->
+<option></option><!-- OPCAO DE MENU - ITEM DENTRO DE UM <SELECT> define uma opção dentro de um <select>-->
+<button></button><!-- BOTAO - CRIA BOTOES PERSONALIZADOS botão de envio ou de ação-->
+<fieldset></fieldset><!--AGRUPAMENTO - AGRUPA CAMPOS RELACIONADOS -->
+<legend></legend><!--LEGENDA - DEFINE UM TITULO PARA O <fieldset>-->
+<datalist></datalist><!--SUGESTOES - LISTA DE OPCOES SUGERIDAS PARA UM <input>-->
+<output></output><!--SAÍDA - EXIBE O RESULTADO DE UM CALCULO OU ACAO-->
+
+
+
+<!--=====================================TIPOS DE INPUTS MAIS USADOS=================================================================-->
+<!--============================================INPUT TYPE=""==========================================================================-->
+<text></text><!--CAMPO DE TEXTO SIMPLES-->
+<!--<input type="text" name="nome">-->
+<password></password><!--CAMPO DE SENHA OCULTA OS CARACTERES-->
+<!--<input type="password" name="senha">-->
+<email></email><!--CAMPO DE EMAIL VALIDACAO AUTOMATICA-->
+<!--<input type="email" name="email">-->
+<number></number><!--CAMPO NUMERIO-->
+<!--<input type="number" name="idade" min="0" max="120">-->
+<tel></tel><!--CAMPO DE TELEFONE-->
+<!-- <input type="tel" name="telefone">-->
+<url></url><!--CAMPO DE URL-->
+<!--<input type="url" name="site">-->
+<date></date><!--CAMPO DE DATA-->
+<!--<input type="date" name="data_nascimento">-->
+<time></time><!--CAMPO DE HORA-->
+<!--<input type="time" name="hora">-->
+<color></color><!--SELECTOR DE COR-->
+<!--<input type="color" name="cor">-->
+<checkbox></checkbox><!--CAIXA DE SELECAO MULTIPLA-->
+<!--<input type="checkbox" name="termos"> Aceito os termos-->
+<radio></radio><!--BOTAO DE OPCAO UNICA ESCOLHA-->
+<!--<input type="radio" name="sexo" value="M"> Masculino-->
+<file></file><!--SELECIONAR FICHEIRO-->
+<!--<input type="file" name="foto">-->
+<submit></submit><!--BOTAO DE ENVIO-->
+<!--<input type="submit" value="Enviar">-->
+<reset></reset><!--BOTAO PARA LIMPAR O FORMULARIO-->
+<!--<input type="reset" value="Limpar">-->
+<hidden></hidden><!--CAMPO OCULTO-->
+<!--<input type="hidden" name="id" value="123">-->
+
+
+<!--=========================================ATRIBUTOS IMPORTANTES===============================================================-->
+
+<form action="/enviar"></form><!--DEFINE O DESTINO DOS DADOS(URL)-->
+<form methor="get/post"></form><!--DEFINE O METODO DE ENVIO (GET OU POST)-->
+<campos name="email"></campos><!-- USADO NO CAMPOS IDENTIFICA O CAMPO USADO PARA ENVIAR DADOS-->
+<id></id><!--USADO EM QUALQUER TAG IDENTIFICADOR UNICO LIGADO AO <label>-->
+<input value="Portugal"><!--DEFINE O VALOR PADRÃO DO CAMPO-->
+<input ou textarea placeholder="Digite o seu nome"><!--MOSTRA TEXTO DE AJUDA DENTRO DO CAMPO-->
+<input ou select required><!--TORNA O CAMPO OBRIGATORIO-->
+<input readonly><!--TORNA O CAMPO APENAS LEITURA-->
+<input ou qualquer campo disabled><!--DESACTIVA O CAMPO-->
+<!--
+Sempre associe <label> ao campo com for="id" para melhor acessibilidade.
+Use method="post" quando os dados forem confidenciais (senhas, formulários de compra).
+Use CSS para estilizar o formulário (espaçamento, cores, layout).
+Validações podem ser feitas com HTML5 (required, type="email") e JavaScript.
+-->
+
+
+<!--=================================================META TAGS========================================================================-->
+<!-- em HTML são informações invisíveis ao utilizador, 
+mas essenciais para navegadores, motores de busca e redes sociais.
+Elas ajudam a definir como a página será exibida, interpretada e indexada, além de influenciar o SEO (Search Engine Optimization) e o comportamento do site.-->
+
+<meta charset="UTF-8"><!-- TAG PARA RECONHECIMENTO PADRADO DE CHARS-->
+<!--TAG DE RESOLUCAO RESPONSIVA-->
+<meta name="viewport" content="width=device-width, initial-scale=1,"> <!-- TAG PARA RESOLUCAO RESPONSIVA-->
+<meta name="description" content="Breve história de um ser humano a aprender como programar pela primeira vez."><!-- TAG PARA DESCRIÇÃO NO MOTOR DE BUSCA-->
+<meta name="keywords" content="design, decoração, móveis, interiores"><!-- PALAVRAS CHAVE RELACIONADAS AO CONTEUDO, POUCO USADO HOJE MAS AINDA VÁLIDO.-->
+<meta name="author" content="Maria Silva"><!--NOME DO AUTOR OU EMPRESA RESPONSAVEL PELO SITE-->   
+<meta name="robots" content="index, follow"><!--INDICA AOS MOTORES DE BUSCA SE DEVEM INDEXAR A PAGINA-->
+<meta http-equiv="refresh" content="10;url=outra-pagina.html"><!--FAZ O NAVEGADOR ACTUALIZAR OU REDIRECIONAR A PAGINA AUTOMATICAMENTE-->    
+<meta http-equiv="content-language" content="pt"><!--DEFINE O IDIOMA DA PÁGINA-->
+
+<!--====================================METATAGS PARA REDES SOCIAIS=================================================================-->
+<!--====================================OPENGRAPGH - FACEBOOK,LINKEIN...==============================================================-->
+<meta property="og:title" content="Loja de Decoração Moderna">
+<meta property="og:description" content="Encontre móveis e acessórios elegantes para sua casa.">
+<meta property="og:image" content="https://site.com/imagem.jpg">
+<meta property="og:url" content="https://site.com">
+<meta property="og:type" content="website">
+
+<!--=========================================TWITTER CARDS==========================================================================-->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Loja de Decoração Moderna">
+<meta name="twitter:description" content="Encontre móveis e acessórios elegantes para sua casa.">
+<meta name="twitter:image" content="https://site.com/imagem.jpg">
+
+<!--==============================METATAGS DE SEGURANCA E COMPATIBILIDADE==========================================================================-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge"><!--DEFINE COMPATIBILIDADE COM O INTERNET EXPLORER-->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'"><!-- CONTROLA O CARREGAMENTO DE RECURSOS PARA EVITAR ATAQUES-->
+<meta name="theme-color" content="#ff6600"><!--DEFINE A COR DA BARRA DO NAVEGADOR EM DISPOSITIVOS MOVEIS-->
+
+<!--
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" ...>
+Evite abusar de:
+<meta name="keywords"> (já não é usada para SEO moderno).
+Atualizações automáticas com <meta http-equiv="refresh"> (pode irritar o utilizador).
+Extra:
+Inclua as metatags de Open Graph e Twitter Cards se quiser que o site tenha pré-visualizações profissionais nas redes sociais.
+-->
+
+
+
+<!--=============================================EVENTOS=====================================================================-->
+
+<!--UM EVENTO É ALGO QUE ACONTECE NA PAGINA WEB, O USER CLICA O BOTAO, PREENCHE UM CAMPO DE TEXTO,-->
+<!--EXISTE M 3 FORMAS PRINCIPAIS DE ASSOCIAR EVENTOS-->
+<!-- DIRECTAMENTE NO HTML-->
+<button onclick="alert('Olá!')">Clicar</button>
+<!-- NO JAVASCRIPT(METODO TRADICIONAL)-->
+document.getElementById("btn").onclick = function() {
+  alert("Olá!");};
+<!-- NO JAVASCRIPT MODERNO(COM addEventeListener)-->
+document.getElementById("btn").addEventListener("click", () => {
+  alert("Olá!");});
+
+
+<!--==========================================EVENTOS DE RATO======================================================================-->
+<button onclick="alert('Clicou!')">Clique</button><!-- -onclick-O UTILIZADOR CLICA NUM ELEMENTO disparado quando um elemento é clicado-->
+<button onmousedown="alert('Pressionou!')">Pressione</button><!-- onmousedown- O BOTAO DO RATO E PRESSIONADO disparado quando um botão do rato é pressionado sobre um elemento-->
+<button onmouseup="alert('Soltou!')">Solte</button><!--onmouseup - O BOTAO DO RATO É SOLTO disparado quando um botão do rato é solto sobre um elemento-->
+<div ondblclick="alert('Duplo clique!')"></div><!-- ondblclick -O UTILIZADOR FAZ DUPLO CLIQUE disparado quando um elemento é duplamente clicado.-->
+<div onmousemove="console.log('Movendo...')"></div><!-- onmousemove- O RATO É MOVIDO-->
+<p onmouseover="this.style.color='red'">Passe aqui!</p><!-- onmouseover - O RATO PASSA POR CIMA disparado quando o cursor do rato passa sobre um elemento-->
+<p onmouseout="this.style.color='black'">Saiu!</p><!-- onmouseout- O RATO SAI DE CIMA DO ELEMENTO disparado quando o cursor do rato deixa um elemento-->
+
+
+<!--======================================EVENTOS DE TECLADO==========================================================================-->
+<input onkeydown="console.log('Tecla pressionada')"><!--onkeydown -UMA TECLA É PRESSIONADA disparado quando uma tecla é pressionada-->
+<input onkeypress="console.log('Digitando')"><!--onkeypress -UMA TECLA É PRESSIONADA(CARACTERE GERADO) disparado quando uma tecla é pressionada e solta-->
+<input onkeyup="console.log('Soltou a tecla')"><!--onkeyup -A TECLA É SOLTA disparado quando uma tecla é solta-->
+
+
+<!--======================================EVENTOS DE FORMULÁRIO=============================================================================-->
+<form onsubmit="alert('Enviado!')"></form><!--onsubmit- O FORMULÁRIO É ENVIADO disparado quando um formulário é submetido-->
+<form onreset="alert('Limpo!')"></form><!--onreset - O FORMULÁRIO É REINICIADO disparado quando um formulário é redefinido-->
+<select onchange="alert('Alterado!')"></select><!--onchange -O VALOR DE UM CAMPO MUDA disparado quando o valor de um elemento de entrada é alterado-->
+<input oninput="console.log(this.value)"><!--oninput -O VALOR É ALTERADO(A CADA TECLA) disparado quando o valor de um elemento de entrada é modificado-->
+<input onfocus="this.style.background='lightyellow'"><!--onfocus -O CAMPO RECEBE FOCO (CLICADO)-->
+<input onblur="this.style.background='white'"><!--onblur -O CAMPO PERDE O FOCO-->
+
+
+<!--======================================EVENTOS DE JANELA/DOCUMENTO=====================================================================================-->
+<body onload="alert('Página carregada!')"></body><!--onload -A PAGINA TERMINOU DE CARREGAR disparado quando a página ou um recurso são carregados-->
+<!--body onresize="alert('Janela redimentsionada!')" ou
+window.onresize = () => console.log('Redimensionada');
+onresize -A JANELA MUDA DE TAMANHO disparado quando a janela do navegador é redimensionada-->
+window.onscroll = () => console.log('Rolando...');<!-- ou <div style="height: 200px; overflow-y: scroll;" onscroll="alert('Página rolada!')"><div style="height: 400px;">Conteúdo rolável</div></div>
+onscroll -A PAGINA É ROLADA disparado quando a página é rolada-->
+<body onunload="alert('Saiu da página!')"></body><!--onunload -A PAGINA É FECHADA OU RECARREGADA-->
+
+
+<!--======================================EVENTOS DE TOQUE(MOBILE E TABLETS)==============================================================================================-->
+<div ontouchstart="alert('Toque iniciado')"></div><!--ontouchstart -O DEDO TOCA NA TELA-->
+<div ontouchend="alert('Toque terminou')"></div><!--ontouchstar -O TOQUE TERMINA-->
+<div ontouchmove="console.log('Deslizando...')"></div><!--ontouchmove -O DEDO MOVE-SE NA TELA-->
+
+
+<!--======================================EVENTOS MULTIMEDIA(AUDIO E VIDEO)============================================================-->
+<video onplay="console.log('Play')"></video><!--onplay -O VIDEO/AUDIO COMECA A REPRODUZIR-->
+<audio onpause="console.log('Pausado')"></audio><!--onpause -O VIDEO/AUDIO E PAUSADO-->
+<video onended="alert('Terminou!')"></video><!--onended -A REPRODUCAO TERMINA-->
+<audio onvolumechange="console.log('Volume alterado')"></audio><!--onvolumechange -O VOLUME É ALTERADO-->
+
+
+<!--============================================OUTROS EVENTOS=================================================================================-->
+<input type="text" onfocus="this.style.backgroundColor='lightblue'"><!--onfocus - DISPARADO QUANDO UM ELEMENTO RECEBE FOCO-->
+<input type="text" onblur="this.style.backgroundColor=''"><!--onblur -DISPARADO QUANDO UM ELEMENTO PERDE O FOCO-->
+<input type="text" oninput="alert('Valor modificado!')"><!--oniput -DISPARADO QUANDO O VALOR DE UM INPUT,TEXTAREA,SELECT E MODIFICADO-->
+<!--
+Sempre prefira addEventListener() — é mais moderno e separa bem HTML e JavaScript.
+Evite misturar código JS dentro do HTML (ex: onclick="...").
+Combine eventos com funções para tornar o código limpo e reutilizável.
+Teste bem em dispositivos móveis, pois eventos de toque são diferentes dos de rato.
+-->
+
+
+<!--================================TAGS PARA PREPARAR CSS & JAVASCRIPT E CARREGÁ-LOS=================================================-->
+    <script></script><!-- LINKAS O JAVASCRIPT sempre no final para carregar a página e só no fim executar o script, assim não corre o risco da página não ser lida por causa do script-->
+    <style></style><!--TAGS PARA ESTILIZAR O CONTEÚDO COM O CSS,LEMBRANDO QUE CONSEGUIMOS MANIPULAR O CSS COM JS ATRAVÉS DO OBJECTO.
+    MAS A TAG STYLE É CSS PURO.-->
+    <link><!--LINKAS O CSS e deve ser sempre posto na tag head para leitura-->
+
+    <!--=======================EXISTEM TRÊS FORMAS DE ANEXAR/PUXAR OS ELEMENTOS IDENTIFICADORES UNICOS EM CSS============================-->
+    <!--O PROPRIO ELEMENTO-->
+    <class="X"></class><!--CATEGORIA OU GRUPO, EM QUE OS ELEMENTOS PODEM TER
+    MULTIPLAS CLASSES E MULTIPLOS ELEMENTOS PODEM TER A MESMA CLASS 
+    EXISTEM PRIMARIAS EM QUE MAIS TARDE DA TARGET COM CSS.
+    É UM ATRIBUTO DO ELEMENTO COM O QUAL CONSEGUIMOS CRIAR UM ESPAÇO SEPARADO CONTENDO UMA LISTA DE CLASSES DO OU DOS ELEMENTOS.
+    SERVE PARA QUE O CSS OU JAVASCRIPT CONSIGA SELECIONAR E TER ACESSO ESPECIFICO AO ELEMENTO VIA SELECTOR CLASSE class="h1color"
+    E DEPOIS EM CSS h1color {background-color:green} OU TEMOS A OPCAO
+    DA FUNCÃO CHAMADA COM O "METHOD" method Document.getElementsByClassName().-->  
+    <id></id><!--É UNICO, IMUTÁVEL. DEFINE UM IDENTIFICADOR UNICO QUE TEM DE SER UNICO NO DOCUMENTO INTEIRO. A SUA FUNÇÃO É 
+    IDENTIFICAR UM ELEMENTO QUANDO ESTE É LINKADO/CHAMADO( USANDO O IDENTIFICADOR FRAGMENTADO),PARA SCRIPTING(JAVASCRIPT) OU 
+    ESTILIZADO( COM CSS).-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html><!--DEFINE O TIPO DE DOCUMENTO E O PADRAO DE CONFIGURAÇÃO-->
+<html lang="pt-pt"><!-- DEFINE A LINGUA QUE ESTARÁ O DOCUMENTO-->
+
+
+  <head><!-- INFO PARA O MOTOR DE BUSCA E CONFIGURACAO GERAL PARA CARREGAR CSS E JAVASCRIPT-->
+    
+    <meta charset="UTF-8"><!-- TAG PARA RECONHECIMENTO PADRADO DE CHARS-->
+    <!--TAG DE RESOLUCAO RESPONSIVA-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,"> <!-- TAG PARA RESOLUCAO RESPONSIVA-->
+    <meta description="Breve história de um ser humano a aprender como programar pela primeira vez."><!-- TAG PARA DESCRIÇÃO NO MOTOR DE BUSCA-->
+    <style></style><!--TAGS PARA ESTILIZAR O CONTEÚDO COM O CSS,
+    LEMBRANDO QUE CONSEGUIMOS MANIPULAR O CSS COM JS ATRAVÉS DO OBJECTO.
+    MAS A TAG STYLE É CSS PURO.-->
+    <link rel="stylesheet" href="styles.css"><!--LINKAS O CSS OU OUTRA FONTE-->
+    <title>Teste de CSS Basico</title><!-- TAGA PARA DAR TÍTULO NA DESCRIÇÃO DO SEPARADOR-->
+  </head>
+
+  
+   
+  <body><!--CORPO DO DOCUMENTO OU SEJA O SEU CONTEUDO-->
+
+    <header><!-- CABECALHO DO DOCUMENTO-->
+      <h1>Foz do Arelho</h1><!-- TÍTULO DO DOCUMENTO DE 1 - 6 VARIANDO O TAMANHO-->  
+    </header>
+    
+
+    <main><!-- É O ELEMENTO FUNDAMENTAL DO DOCUMENTO, TEM O CONTEUDO PRINCIPAL DO CORPO DO DOCUMENTO -->
+      <section><!-- CONTEM UMA SECÃO GENÉRICA AGRUPADA,OU SEJA UM GRUPO DE CONTÉUDO ESPECIFICO, VARIANDO DE H1 A H6-->
+        <hr><!-- É UMA LINHA DE BREAK, QUE PODE SER USADO PARA QUEBRAS O CONTEUDO PARA OUTRO TÓPICO -->
+        <h3>Secção do Tipo de Pessoas</h3>
+        <hr>
+        <p class="dark">Os nativos.</p> <!--TAG PARA PARÁGRAFO OCUPA A LARGURA INTEIRA/
+            ESPAÇO HORIZONTAL/ BLOCK LEVEL-->
+        <hr>
+        <p class="light">Os imigrados.</p>
+        <hr>
+        <p class="dark">Os pára-quedas.</p>
+        <hr>
+        <p>Os Margaçeiros.</p>
+      </section>
+        
+      
+      <section>
+      <hr>
+      <h4 id="emph">A Aldeia de Smurfs.</h4>
+      <a target="_blank" href="https://www.jf-fozdoarelho.pt/" description="Site oficial da Foz do Arelho!">A Aldeia de Smurfs.</a>
+      </hr>
+      </section>
+      
+    
+
+      <section>
+        <span>
+          <h4>Sítios que podem visitar!</h4>
+        </span> 
+          <hr>
+        <ol id="ul1"><!--TAG PARA LISTA ORDENADA-->
+          <li>Lagoa de Óbidos</li><!-- REPRESENTA A LISTA DO ITEM-->
+          <li>O Spot do Barcos</li>
+          <li>O Coreto</li>
+          <li>O Polidesportivo</li>
+          <li>O Foz Praia</li>
+          <li>O Cabeço</li>
+          <li>A Fonte dos Namorados</li>
+          <li>A Pedreira</li>
+        </ol>
+      </section>
+        
+    
+    </main>
+    
+
+    <button disabled>Botão de teste</button><!--TAG PARA CRIAR BOTÕES-->
+    <a href="https://www.google.com" target="_blank">Link do Google</a><!--TAG PARA ANCHOR/LINKAGEM DE PÁGINAS INTERNAS OU EXTERNAS // TEMOS O TARGET QUE MANIPULA
+    COMO O SITE OU IMAGEM SERA ABERTO. OCUPA O ESPAÇO NECESSÁRIO HORIZONTAL, TIPO DIV/SPAN INLINE-->
+    <img src="img/walterwhite1.png" alt="Walter White page" width="300px"><!--TAG PARA IMAGEM, SRC PUXA A ORIGEM DA IMAGEM O ALT A DESCRICAO DA IMG, WIDTH O TAMANHO-->
+    <audio></audio><!--TAG PARA AUDIO-->
+    <video></video><!--TAG PARA VIDEO-->
+
+
+    <ol></ol><!--TAG PARA LISTA ORDENADA-->
+    <ul></ul><!--TAG PARA LISTA ALEATÓRIA/DESORDENADA-->
+    <li></li><!--TAG PARA ITEM DA LISTA-->
+
+    <div></div>
+    <!--TAG PARA DIVIDIR NUM BLOCO QUE OCUPA TODA A LARGURA DISPONIVEL/
+    BLOCO DE CONSTRUÇÃO GENÉRICA PARA AGRUPAR SECOES E CONTAINERS E ORGANIZAR A PAGINA DO DOC-->
+    
+    <span></span><!--TAG PARA PARA DIVIDIR APENAS EM LINHA 
+    INLINE PARA ESTILIZAR PARTES DE TEXTO -->
+    <!--AMBOS DIV E SPANS SERVEM COMO CONTAINERS PARA RECEBER ELEMENTOS
+    ELES POR SI SÓ NÃO ALTERAM EM NADA O DOC.AJUDAM A AGRUPAR AS COISAS.-->
+
+    <nav></nav>
+    <button disabled>Botão de teste</button>
+
+    <footer>
+      <p>All Rights Reserved.<p>
+    </footer> 
+
+  </body>
+  <script src="script.js" defer></script><!-- ESTE ELEMENT PERMITO INCLUIR SCRIPT DINAMICO E BLOCOS DE DATA NOS DOCS-->
+</html>

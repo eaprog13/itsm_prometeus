@@ -1,0 +1,119 @@
+/* ================================================
+   1. RESET / NORMALIZAÇÃO
+================================================ */
+
+/* reset global */
+/* box-sizing */
+/* remover margens e paddings padrão */
+/* comportamento padrão de imagens */
+
+
+/* ================================================
+   2. VARIÁVEIS / SISTEMA DE DESIGN
+================================================ */
+
+/* cores */
+/* tipografia */
+/* espaçamentos */
+/* tamanhos */
+/* bordas */
+/* sombras */
+/* z-index */
+
+
+/* ================================================
+   3. BASE / ELEMENTOS GLOBAIS
+================================================ */
+
+/* body */
+/* headings (h1–h6) */
+/* parágrafos */
+/* listas */
+/* imagens */
+/* links */
+
+
+/* ================================================
+   4. TIPOGRAFIA
+================================================ */
+
+/* tamanhos de títulos */
+/* estilos de texto */
+/* alinhamentos */
+
+
+/* ================================================
+   5. LINKS E INTERAÇÕES
+================================================ */
+
+/* links */
+/* hover */
+/* focus */
+/* active */
+
+
+/* ================================================
+   6. LAYOUT / ESTRUTURA DA PÁGINA
+================================================ */
+
+/* container */
+/* header */
+/* navegação */
+/* main */
+/* secções */
+/* footer */
+
+
+/* ================================================
+   7. ESTRUTURAS FLEX / GRID
+================================================ */
+
+/* layouts em flex */
+/* layouts em grid */
+/* wrappers */
+
+
+/* ================================================
+   8. COMPONENTES
+================================================ */
+
+/* cartões (cards) */
+/* botões */
+/* formulários */
+/* menus */
+/* banners */
+/* modais */
+
+
+/* ================================================
+   9. UTILITÁRIOS / CLASSES AUXILIARES
+================================================ */
+
+/* alinhamento de texto */
+/* esconder elementos */
+/* helpers de espaçamento */
+/* helpers de display */
+
+
+/* ================================================
+   10. ANIMAÇÕES E TRANSIÇÕES
+================================================ */
+
+/* transições */
+/* keyframes */
+/* animações hover */
+
+
+/* ================================================
+   11. RESPONSIVIDADE
+================================================ */
+
+/* tablet */
+@media () {
+
+}
+
+/* mobile */
+@media () {
+
+}

@@ -1,0 +1,36 @@
+/*
+=====================================================
+ DICIONÁRIO – UNIDADES E TIPOGRAFIA CSS
+=====================================================
+*/
+
+/*
+1 - UNIDADES ABSOLUTAS
+   px, in, cm, mm, pt
+   - Fixas, não dependem de elementos pais
+*/
+
+/*
+2 - UNIDADES RELATIVAS
+   %, em, rem, vh, vw
+   - Adaptáveis, responsivas
+*/
+
+body {
+  font-size: 16px; /* base */
+  font-family: 'Poppins', sans-serif;
+}
+
+h3 {
+  font-size: 1.5625rem; /* 25px relativo a 16px do body */
+  text-align: center;
+}
+
+h4 {
+  font-size: 30px;
+  text-align: center;
+  padding: 5px;
+}
+
+/* Google Fonts import via CSS */
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap'); */

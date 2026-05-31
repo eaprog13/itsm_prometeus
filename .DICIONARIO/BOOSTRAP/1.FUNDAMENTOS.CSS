@@ -1,0 +1,165 @@
+/*
+=====================================================
+ DICIONÁRIO DE ESTUDO – BOOTSTRAP FUNDAMENTAL (COMPLETO)
+ Uso: Material de apoio no VS Code
+=====================================================
+*/
+
+
+
+/*
+=============================
+ FORMAS DE USAR BOOTSTRAP
+=============================
+1 - CDN (rápido e recomendado para testes)
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+2 - Arquivo CSS local (download oficial)
+   <link rel="stylesheet" href="bootstrap.min.css">
+
+3 - JS opcional para componentes interativos
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+*/
+
+/*
+=====================================================
+ DICIONÁRIO – BOAS PRÁTICAS BOOTSTRAP
+=====================================================
+*/
+
+/*
+1 - ESTRUTURA E ORGANIZAÇÃO
+   - Sempre começar com container
+   - Grid system: row + col-*
+   - Evitar classes customizadas desnecessárias
+*/
+
+.container { }       
+.container-fluid { } 
+.row { display: flex; flex-wrap: wrap; }
+.col { flex: 1; padding: 0.5rem; }
+
+/* Grid avançado */
+.col-auto { width: auto; }
+.g-3 { gap: 1rem; } /* espaçamento entre colunas e linhas */
+
+/*
+2 - TIPOGRAFIA
+   - Classes para alinhamento, peso e responsividade
+*/
+
+.text-center { text-align: center; }
+.text-start { text-align: left; }
+.text-end { text-align: right; }
+.fw-bold { font-weight: bold; }
+.fw-light { font-weight: 300; }
+.lead { font-size: 1.25rem; font-weight: 300; }
+.display-1 { font-size: 6rem; font-weight: 300; }
+
+/* Tipografia responsiva */
+.fs-1 { font-size: 2.5rem; }
+.fs-2 { font-size: 2rem; }
+
+/*
+3 - CORES E FUNDO
+   - Classes utilitárias para cores, background, bordas e opacidade
+*/
+
+.text-primary { color: #0d6efd; }
+.text-secondary { color: #6c757d; }
+.text-success { color: #198754; }
+.text-danger { color: #dc3545; }
+.text-warning { color: #ffc107; }
+.text-info { color: #0dcaf0; }
+.text-light { color: #f8f9fa; }
+.text-dark { color: #212529; }
+
+.bg-primary { background-color: #0d6efd; color: white; }
+.bg-light { background-color: #f8f9fa; }
+.bg-dark { background-color: #212529; color: white; }
+.bg-opacity-50 { opacity: 0.5; }
+
+.border { border: 1px solid #dee2e6; }
+.rounded { border-radius: 0.25rem; }
+.rounded-circle { border-radius: 50%; }
+
+/*
+4 - ESPAÇAMENTO
+   - m-* = margin, p-* = padding
+   - t, b, s, e = topo, baixo, start(esq), end(dir)
+   - escala 0 a 5
+*/
+
+.m-0 { margin: 0 !important; }
+.mt-3 { margin-top: 1rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.ms-4 { margin-left: 1.5rem; }
+.p-2 { padding: 0.5rem; }
+.px-3 { padding-left & padding-right: 1rem; }
+
+/*
+5 - RESPONSIVIDADE
+   - Grid responsivo: col-sm, col-md, col-lg, col-xl, col-xxl
+   - Display utilities: d-none, d-sm-block, d-md-flex
+   - Flex utilities: justify-content-*, align-items-*, flex-*
+*/
+
+@media (max-width: 576px) { /* xs */ }
+@media (min-width: 576px) { /* sm */ }
+@media (min-width: 768px) { /* md */ }
+@media (min-width: 992px) { /* lg */ }
+@media (min-width: 1200px) { /* xl */ }
+@media (min-width: 1400px) { /* xxl */ }
+
+/*
+6 - COMPONENTES COMUNS
+   - Botões, Cards, Alerts, Forms, Tables, Navbars
+*/
+
+.btn { display: inline-block; padding: 0.5rem 1rem; border-radius: 0.25rem; }
+.btn-primary { background-color: #0d6efd; color: white; }
+.btn-outline-secondary { border: 1px solid #6c757d; color: #6c757d; }
+
+.card { border: 1px solid #dee2e6; border-radius: 0.25rem; padding: 1rem; }
+.card-body { padding: 1rem; }
+.card-title { font-size: 1.25rem; font-weight: bold; }
+.card-text { font-size: 1rem; }
+
+.alert { padding: 0.75rem 1rem; border-radius: 0.25rem; }
+.alert-success { background-color: #d1e7dd; color: #0f5132; }
+
+.table { width: 100%; border-collapse: collapse; }
+.table-striped tbody tr:nth-of-type(odd) { background-color: rgba(0,0,0,.05); }
+
+.navbar { display: flex; align-items: center; padding: 0.5rem 1rem; }
+.navbar-brand { font-weight: bold; }
+
+/*
+7 - COMPONENTES INTERATIVOS (JS necessário)
+   - Modals, Dropdowns, Tooltips, Popovers, Carousel
+   - Requer: bootstrap.bundle.min.js
+*/
+
+/* Exemplo modal */
+.modal { display: none; } 
+.modal.show { display: block; }
+
+/*
+8 - UTILITIES AVANÇADAS
+   - Sizing: w-25, w-50, w-75, w-100
+   - Overflow: overflow-auto, overflow-hidden
+   - Position: position-relative, position-absolute, top-0, start-0
+   - Z-index: z-1, z-2, z-3
+*/
+
+/*
+9 - BOAS PRÁTICAS BOOTSTRAP
+   - Evitar !important
+   - Reutilizar classes utilitárias
+   - Usar componentes padrão sempre que possível
+   - Criar classes customizadas apenas quando necessário
+   - Documentar alterações
+   - Minificar CSS em produção
+*/
+
+/* Fim do dicionário completo de Bootstrap */

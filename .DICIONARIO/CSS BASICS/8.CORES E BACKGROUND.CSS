@@ -1,0 +1,13 @@
+/*=============================
+4 - CORES & BACKGROUND
+=============================*/
+header {
+background-color: rgba(168, 76, 76, 0.8); /* cor com opacidade */
+}
+a {
+color: blue;
+background-color: burlywood;
+}
+.banner {
+background: linear-gradient(to right, red, yellow); /* gradiente */
+}
