@@ -36,7 +36,7 @@ print(i.user_id, i.nome)
 print(k.user_id, k.nome)
 
 users = []
-users.append(i)   # adiciona o objeto completo
+users.append(i)  
 users.append(j)
 users.append(k)
 
