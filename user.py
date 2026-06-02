@@ -4,7 +4,7 @@ from datetime import datetime
 class User:
   
   contador = 0
-  users = []
+  lista_usersusers = []
   def __init__(self, nome, email, contacto, tipo, horario):
    
     User.contador += 1  
@@ -35,13 +35,17 @@ print(j.user_id, j.nome)
 print(i.user_id, i.nome)
 print(k.user_id, k.nome)
 
-users = []
-users.append(i)  
-users.append(j)
-users.append(k)
+lista_users = []
+lista_users.append(i)  
+lista_users.append(j)
+lista_users.append(k)
 
 for u in users:
   print(u.user_id, u.nome)
   
-print(len(users))
+
+  
+  
+  
+  
   
