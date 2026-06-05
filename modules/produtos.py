@@ -14,7 +14,7 @@ class Produto:
     self.n_serie = n_serie
     self.produto_criado_em = datetime.now()
   
-  def mostrar(self):
+  def mostrar_obj(self):
     print('\n----------PRODUTO----------')
     print(f'Id: {self.produto_id}\n | Nome: {self.nome} |\n | Tipo: {self.tipo} |\n | NºSérie: {self.n_serie} |\n | Criado me: {self.produto_criado_em:%d/%m/%Y %H:%M:%S}|\n')
     
@@ -33,12 +33,12 @@ class Produto:
   @classmethod
   
   def criar(cls, nome, tipo, n_serie):
-    p = Produto(nome, tipo, n_serie)
+    p = cls(nome, tipo, n_serie)
     cls.lista_produtos.append(p)
     print(f'O produto {nome} foi criado!')
     
   @classmethod    
-  def listar(cls):
+  def mostrar_lista(cls):
     if len(cls.lista_produtos) == 0:
       print(f'Ainda não há produtos registados!')
     else:
