@@ -23,7 +23,7 @@ class User:
   # Métodos aplicados ao objecto directo
   def mostrar(self):
     print('\n----------USER----------')
-    print(f'Id: {self.user_id}\n | Nome: {self.nome} |\n | Email: {self.email} |\n | Contacto: {self.contacto} |\n | Tipo: {self.tipo} |\n | Horário: {self.horario} |\n | Criado me: {self.user_criado_em:%d/%m/%Y %H:%M:%S}|\n')
+    print(f'| Id: {self.user_id}\n | Nome: {self.nome} |\n | Email: {self.email} |\n | Contacto: {self.contacto} |\n | Tipo: {self.tipo} |\n | Horário: {self.horario} |\n | Criado me: {self.user_criado_em:%d/%m/%Y %H:%M:%S}|\n')
   
   def editar(self, nome, email, contacto, tipo, horario):
     self.nome = nome
@@ -35,7 +35,7 @@ class User:
   
   def eliminar(self):
     User.lista_users.remove(self)
-    print(f'O user {self.nome} foi eliminado da base de dados!')
+    print(f'| O user {self.nome} foi eliminado da base de dados! |')
         
 
   
@@ -45,13 +45,13 @@ class User:
   def criar(cls, nome, email, contacto, tipo, horario):
     u = User(nome, email, contacto, tipo, horario)
     cls.lista_users.append(u)
-    print(f'O user {nome} foi criado com sucesso!')
+    print(f'| O user {nome} foi criado com sucesso!')
     
   
   @classmethod
-  def listar(cls):
+  def consultar_lista(cls):
     if len(cls.lista_users) == 0:
-      print('Não existem user registados!')
+      print('| Não existem user registados!')
     else:
       for u in cls.lista_users:
         u.mostrar()  
