@@ -66,9 +66,11 @@ def menu_tickets():
 
 def menu_tickets_editar():
   print('\n|----------MENU EDITAR Ticket----------|')
-  print('| 1. nome |')
-  print('| 2. categoria |')
-  print('| 3. número de série|')
+  print('| 1. user_id |')
+  print('| 2. Tecnico_id |')
+  print('| 3. Produto_id |')
+  print('| 4. Prioridade |')
+  print('| 5. Descrição |')
   print('| 0. Sair |')
   print('|----------DIGITA A OPCAO----------|')
   return input('| O que pretendes alterar?')
@@ -159,8 +161,8 @@ while True:
                     
           case '2':
             Produto.consultar_lista()
-            produto_id = int(input('| Qual é o ID do User?'))
-            p = Produto.lista_produtos[user_id - 1]
+            produto_id = int(input('| Qual é o ID do Produto?'))
+            p = Produto.lista_produtos[produto_id - 1]
             
             while True:
               op_editar = menu_produtos_editar()
@@ -178,22 +180,22 @@ while True:
                   print('Digitaste uma opção incorrecta! Tenta Novamente!')
                     
           case '3':
-            Ticket.consultar_lista()     
+            Produto.consultar_lista()     
                       
           case '4':
             Produto.consultar_lista()            
             p_id = int(input('| Indica o ID do User que queres eliminar: '))
             
-            #CORRER A LISTA COM O USER_ID
+            #CORRER A LISTA COM O PRODUTO_ID
             for produto in Produto.lista_produtos:
               if produto.produto_id == p_id:
                 
-                op_eliminar = input(f'| Tens a certeza que queres eliminar o user:{user.user_id} nome:{user.nome}? (sim ou nao)-> ')
+                op_eliminar = input(f'| Tens a certeza que queres eliminar o user:{produto.produto_id} nome:{produto.nome}? (sim ou nao)-> ')
                 
                 if op_eliminar.lower() == 'sim':
                   produto.eliminar()
                 else:
-                  print(f'| O {user.nome} não foi eliminado!')
+                  print(f'| O {produto.nome} não foi eliminado!')
                 break                  
             else:
               print(f'| Opção não existente! Digita uma opção correcta! |')                            
@@ -222,7 +224,7 @@ while True:
           case '2':
             Ticket.consultar_lista()
             ticket_id = int(input('| Qual é o ID do ticket?'))
-            t = Ticket.lista_produtos[ticket_id - 1]
+            t = Ticket.lista_tickets[ticket_id - 1]
             
             while True:
               op_editar = menu_tickets_editar()
@@ -247,24 +249,34 @@ while True:
             Ticket.consultar_lista()     
            
           case '4': 
-           Ticket.estado= "fechado"
-           print(f'O {ticket_id} está fechado com sucesso!')
-           
+            Ticket.consultar_lista()
+            t_id = int(input('| Indica o ID do ticket a fechar:'))
+            for ticket in Ticket.lista_tickets:
+              if ticket.ticket_id == t_id:
+                ticket.fechar()
+                break
+            else:
+              print('Opção Inválida, o ticket ainda está aberto!')
+                
           case '5':
-           Ticket.estado= "aberto" 
-           print("REABRIR TICKET")
-           
-                     
+            Ticket.consultar_lista()
+            t_id = int(input('| Indica o ID do ticket a fechar:'))
+            for ticket in Ticket.lista_tickets:
+              if ticket.ticket_id == t_id:
+                ticket.reabrir()
+                break
+            else:
+              print('Opção Inválida, o ticket ainda está fechado!')
                       
           case '6':
             Ticket.consultar_lista()            
             t_id = int(input('| Indica o ID do User que queres eliminar: '))
             
-            #CORRER A LISTA COM O USER_ID
+            #CORRER A LISTA COM O TICKET_ID
             for ticket in Ticket.lista_tickets:
               if ticket.ticket_id == t_id:
-                
-                op_eliminar = input(f'| Tens a certeza que queres eliminar o user:{user.user_id} nome:{user.nome}? (sim ou nao)-> ')
+                # duplicado com o método eliminar, não sei se faço a condição no menu ou se uso o método self para isso...
+                op_eliminar = input(f'| Tens a certeza que queres eliminar o user:{ticket.ticket_id}? (sim ou nao)-> ')
                 
                 if op_eliminar.lower() == 'sim':
                   ticket.eliminar()

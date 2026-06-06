@@ -14,13 +14,13 @@ class Produto:
     self.n_serie = n_serie
     self.produto_criado_em = datetime.now()
   
-  def mostrar_obj(self):
+  def mostrar_produto(self):
     print('\n----------PRODUTO----------')
-    print(f'| Id: {self.produto_id}\n | Nome: {self.nome} |\n | Tipo: {self.tipo} |\n | NºSérie: {self.n_serie} |\n | Criado me: {self.produto_criado_em:%d/%m/%Y %H:%M:%S}|\n')
+    print(f'| Id: {self.produto_id}\n | Nome: {self.nome} |\n | Categoria: {self.categoria} |\n | NºSérie: {self.n_serie} |\n | Criado me: {self.produto_criado_em:%d/%m/%Y %H:%M:%S}|\n')
     
-  def editar(self, nome, tipo, n_serie):
+  def editar(self, nome, categoria, n_serie):
     self.nome = nome
-    self.tipo = tipo
+    self.categoria = categoria
     self.n_serie = n_serie
     print(f'| O produto {self.nome} foi actualizado!')
   
@@ -32,8 +32,8 @@ class Produto:
   # métodos de classe
   @classmethod
   
-  def criar(cls, nome, tipo, n_serie):
-    p = cls(nome, tipo, n_serie)
+  def criar(cls, nome, categoria, n_serie):
+    p = cls(nome, categoria, n_serie)
     cls.lista_produtos.append(p)
     print(f'| O produto {nome} foi criado!')
     
@@ -43,5 +43,5 @@ class Produto:
       print(f'| Ainda não há produtos registados!')
     else:
       for p in cls.lista_produtos:
-        p.mostrar()   
+        p.mostrar_produto()   
     
