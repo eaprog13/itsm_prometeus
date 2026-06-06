@@ -29,14 +29,11 @@ Criar uma aplicação que permita:
 
 ### Backend
 - Python 3.14
-<<<<<<< HEAD
 - Flask 3.1.2
-=======
-- Flask
->>>>>>> f5cca84b1c15f7894352e82b3f5c420e18f8bbe3
+- 
 
 ### Base de Dados
-- SQLite 
+- SQLite/ PostgreSQL 
 
 ### Frontend
 - HTML5
