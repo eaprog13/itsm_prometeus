@@ -20,7 +20,7 @@ def menu_users():
   print('| 4. Eliminar User |')
   print('| 0. Sair |')
   print('|----------DIGITA A OPCAO----------|')
-  return input('| Digita uma opção númerica!|')
+  return input('| Digita uma opção númerica! ')
 
 def menu_users_editar():
   print('\n|----------MENU EDITAR USER----------|')
@@ -33,20 +33,60 @@ def menu_users_editar():
   print('|----------DIGITA A OPCAO----------|')
   return input('| O que pretendes alterar?')
 
-#def menu_produtos()
+def menu_produtos():
+  print('\n|----------MENU PRODUTOS----------|')
+  print('| 1. Criar Produto |')
+  print('| 2. Editar Produto |')
+  print('| 3. Consultar Produto |')
+  print('| 4. Eliminar Produto |')
+  print('| 0. Sair |')
+  print('|----------DIGITA A OPCAO----------|')
+  return input('| Digita uma opção númerica! ')
+
+def menu_produtos_editar():
+  print('\n|----------MENU EDITAR PRODUTO----------|')
+  print('| 1. nome |')
+  print('| 2. categoria |')
+  print('| 3. número de série|')
+  print('| 0. Sair |')
+  print('|----------DIGITA A OPCAO----------|')
+  return input('| O que pretendes alterar?')
+
+def menu_tickets():
+  print('\n|----------MENU TICKETS----------|')
+  print('| 1. Criar Ticket |')
+  print('| 2. Editar Ticket |')
+  print('| 3. Consultar Ticket |')
+  print('| 4. Fechar Ticket |')
+  print('| 5. Reabrir Ticket |')
+  print('| 6. Eliminar Ticket |')
+  print('| 0. Sair |')
+  print('|----------DIGITA A OPCAO----------|')
+  return input('| Digita uma opção númerica! ')
+
+def menu_tickets_editar():
+  print('\n|----------MENU EDITAR Ticket----------|')
+  print('| 1. nome |')
+  print('| 2. categoria |')
+  print('| 3. número de série|')
+  print('| 0. Sair |')
+  print('|----------DIGITA A OPCAO----------|')
+  return input('| O que pretendes alterar?')
+
 
 #def menu_ticket()
 
-
+#MENU PRINCIPAL
 while True:
   op = menu_principal()
   match op:
+    # MENU USER
     case '1':
       while True: 
         op_user = menu_users()
+        
         match op_user:
-          
-          
+        #SUBMENU USER
           case '1':
             nome = input('| Digita o teu nome: ')
             email = input('| Digita o teu email: ')
@@ -54,8 +94,7 @@ while True:
             tipo = input('| Digita o tipo user: ')
             horario = input('| Digita o teu horário: ')
             User.criar(nome, email, contacto, tipo, horario)
-          
-          
+                    
           case '2':
             User.consultar_lista()
             user_id = int(input('| Qual é o ID do User?'))
@@ -63,34 +102,31 @@ while True:
             
             while True:
               op_editar = menu_users_editar()
+              
               match op_editar:
                 case '1':
-                  nome = input('| Qual é o novo nome? ')                  
+                  u.nome = input('| Qual é o novo nome? ')                  
                 case '2':
-                  email = input('| Qual é o novo email? ')                 
+                  u.email = input('| Qual é o novo email? ') 
+                  print(f'| O email do {u.nome} com o id {user_id} foi alterado com sucesso!')                
                 case '3':
-                  contacto = input('| Qual é o novo contacto? ')                  
+                  u.contacto = input('| Qual é o novo contacto? ')                  
                 case '4':
-                  tipo = input('| Qual é o novo tipo? ')                 
+                  u.tipo = input('| Qual é o novo tipo? ')                 
                 case '5':
-                  horario = input('| Qual é o novo horario? ')                 
+                  u.horario = input('| Qual é o novo horario? ')                 
                 case '0':
-                  menu_principal()
                   break            
                 case _:
                   print('Digitaste uma opção incorrecta! Tenta Novamente!')
-            u.editar(nome, email, contacto, tipo, horario)
-          
-          
+                    
           case '3':
-            User.consultar_lista()
-            
-          
+            User.consultar_lista()                     
           case '4':
-            User.consultar_lista()
-            
+            User.consultar_lista()            
             u_id = int(input('| Indica o ID do User que queres eliminar: '))
             
+            #CORRER A LISTA COM O USER_ID
             for user in User.lista_users:
               if user.user_id == u_id:
                 
@@ -100,24 +136,149 @@ while True:
                   user.eliminar()
                 else:
                   print(f'| O {user.nome} não foi eliminado!')
-                break
-                  
+                break                  
             else:
-              print(f'| Opção não existente! Digita uma opção correcta! |')             
-                   
-          
+              print(f'| Opção não existente! Digita uma opção correcta! |')                            
           case '0':
-            menu_principal()
-          
+            break
+          case _:
+            print('| Digita uma opção válida!')
+         
+    # MENU PRODUTOS   
+    case '2':
+      while True: 
+        op_produto = menu_produtos()
+        
+        match op_produto:
+        #SUBMENU PRODUTO
+          case '1':
+            nome = input('| Digita o teu nome: ')
+            categoria = input('| Digita a categoria do produto: ')
+            n_serie = input('| Digita o número de série: ')
+            Produto.criar(nome, categoria, n_serie)
+                    
+          case '2':
+            Produto.consultar_lista()
+            produto_id = int(input('| Qual é o ID do User?'))
+            p = Produto.lista_produtos[user_id - 1]
+            
+            while True:
+              op_editar = menu_produtos_editar()
+              
+              match op_editar:
+                case '1':
+                  p.nome = input('| Qual é o novo nome? ')                  
+                case '2':
+                  p.categoria = input('| Qual é a nova categoria do produto? ')                 
+                case '3':
+                  p.n_serie = input('| Qual é o número de série correcto? ')                  
+                case '0':
+                  break            
+                case _:
+                  print('Digitaste uma opção incorrecta! Tenta Novamente!')
+                    
+          case '3':
+            Ticket.consultar_lista()     
+                      
+          case '4':
+            Produto.consultar_lista()            
+            p_id = int(input('| Indica o ID do User que queres eliminar: '))
+            
+            #CORRER A LISTA COM O USER_ID
+            for produto in Produto.lista_produtos:
+              if produto.produto_id == p_id:
+                
+                op_eliminar = input(f'| Tens a certeza que queres eliminar o user:{user.user_id} nome:{user.nome}? (sim ou nao)-> ')
+                
+                if op_eliminar.lower() == 'sim':
+                  produto.eliminar()
+                else:
+                  print(f'| O {user.nome} não foi eliminado!')
+                break                  
+            else:
+              print(f'| Opção não existente! Digita uma opção correcta! |')                            
+          case '0':
+            break
           case _:
             print('Digita uma opção válida!')
-          
-          
-    case '2':
-      print('| Iniciar a opção de criar o ticket!!')      
+                 
+
+    # MENU TICKETS
     case '3':
-      print('| Iniciar o pedido de consulta')
-    case '4':
+      while True: 
+        op_ticket = menu_tickets()
+        
+        match op_ticket:
+        #SUBMENU TICKET
+          case '1':
+            user_id = input('| Digita o user_id: ')
+            tecnico_id = input('| Digita o ID do técnico : ')
+            produto_id = input('| Digita o ID do produto: ')
+            prioridade = input('| Indica a prioridade: ')
+            descricao = input('| Descreve o problema de forma concisa e clara: ')
+            
+            Ticket.abrir(user_id, tecnico_id, produto_id, prioridade, descricao)
+                    
+          case '2':
+            Ticket.consultar_lista()
+            ticket_id = int(input('| Qual é o ID do ticket?'))
+            t = Ticket.lista_produtos[ticket_id - 1]
+            
+            while True:
+              op_editar = menu_tickets_editar()
+              
+              match op_editar:
+                case '1':
+                  t.user_id = input('| Qual é o ID do user correcto? ')                  
+                case '2':
+                  t.tecnico_id = input('| Qual é o ID do técnico correcto? ')                 
+                case '3':
+                  t.produto_id= input('| Qual é o ID do produto correcto? ')                  
+                case '4':
+                  t.prioridade= input('| Actualiza a prioridade: ')                  
+                case '5':
+                  t.descricao= input('| Actualiza a descrição: ')                  
+                case '0':
+                  break            
+                case _:
+                  print('Digitaste uma opção incorrecta! Tenta Novamente!')
+                    
+          case '3':
+            Ticket.consultar_lista()     
+           
+          case '4': 
+           Ticket.estado= "fechado"
+           print(f'O {ticket_id} está fechado com sucesso!')
+           
+          case '5':
+           Ticket.estado= "aberto" 
+           print("REABRIR TICKET")
+           
+                     
+                      
+          case '6':
+            Ticket.consultar_lista()            
+            t_id = int(input('| Indica o ID do User que queres eliminar: '))
+            
+            #CORRER A LISTA COM O USER_ID
+            for ticket in Ticket.lista_tickets:
+              if ticket.ticket_id == t_id:
+                
+                op_eliminar = input(f'| Tens a certeza que queres eliminar o user:{user.user_id} nome:{user.nome}? (sim ou nao)-> ')
+                
+                if op_eliminar.lower() == 'sim':
+                  ticket.eliminar()
+                else:
+                  print(f'| O {ticket.ticket_id} não foi eliminado!')
+                break                  
+            else:
+              print(f'| Opção não existente! Digita uma opção correcta! |')                            
+          case '0':
+            break
+          case _:
+            print('Digitaste uma opção incorrecta! Tenta Novamente!')
+    # SAIR
+    case '0':
       print('| Programa terminado! Caso queira fazer um novo pedido, execute novamente o programa...')
       break
     case _:

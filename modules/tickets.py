@@ -56,7 +56,7 @@ class Ticket:
 
 
   @classmethod
-  def mostrar_lista(cls):
+  def consultar_lista(cls):
     if len(cls.lista_tickets) == 0:
       print(f'| Não existem tickets na lista!')
     else:

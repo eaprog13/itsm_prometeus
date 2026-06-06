@@ -5,12 +5,12 @@ class Produto:
   contador = 0
   lista_produtos = []
   
-  def __init__ (self, nome, tipo, n_serie):
+  def __init__ (self, nome, categoria, n_serie):
   
     Produto.contador += 1
     self.produto_id = Produto.contador
     self.nome = nome
-    self.tipo = tipo
+    self.categoria = categoria
     self.n_serie = n_serie
     self.produto_criado_em = datetime.now()
   
@@ -38,7 +38,7 @@ class Produto:
     print(f'| O produto {nome} foi criado!')
     
   @classmethod    
-  def mostrar_lista(cls):
+  def consultar_lista(cls):
     if len(cls.lista_produtos) == 0:
       print(f'| Ainda não há produtos registados!')
     else:

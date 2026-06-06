@@ -23,7 +23,7 @@ class User:
   # Métodos aplicados ao objecto directo
   def mostrar(self):
     print('\n----------USER----------')
-    print(f'| Id: {self.user_id}\n | Nome: {self.nome} |\n | Email: {self.email} |\n | Contacto: {self.contacto} |\n | Tipo: {self.tipo} |\n | Horário: {self.horario} |\n | Criado me: {self.user_criado_em:%d/%m/%Y %H:%M:%S}|\n')
+    print(f'Id: {self.user_id}\n | Nome: {self.nome} |\n | Email: {self.email} |\n | Contacto: {self.contacto} |\n | Tipo: {self.tipo} |\n | Horário: {self.horario} |\n | Criado me: {self.user_criado_em:%d/%m/%Y %H:%M:%S}|\n')
   
   def editar(self, nome, email, contacto, tipo, horario):
     self.nome = nome
