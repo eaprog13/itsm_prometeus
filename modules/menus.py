@@ -3,7 +3,7 @@ from modules.users import User
 from modules.produtos import Produto
 from modules.tickets import Ticket
 
-
+#PRINT OPCOES MENUS COM RETURN PARA A LÓGICA
 def menu_principal():
   print('\n|----------ITSM PROMETEUS MENU----------|')
   print('| 1. Menu Users |')
@@ -11,7 +11,7 @@ def menu_principal():
   print('| 3. Menu Tickets |')
   print('| 0. Sair |')
   print('|----------DIGITA A OPCAO----------|')
-  return input('| Digita uma opção de 1 a 4!|')
+  return input('| Digita uma opção de 1 a 4: ')
 
 def menu_users():
   print('\n|----------MENU USERS----------|')
@@ -77,7 +77,7 @@ def menu_tickets_editar():
   return input('| O que pretendes alterar?')
 
 
-#MENU PRINCIPAL
+#LÓGICA MENUS
 def arrancar():
   carregar_dados()
 
@@ -202,8 +202,6 @@ def arrancar():
               else:
                 print(f'| Opção não existente! Digita uma opção correcta! |')                            
             case '0':
-              guardar_dados()
-              print('| Programa encerrado!')
               break
             case _:
               print('Digita uma opção válida!')
@@ -295,6 +293,7 @@ def arrancar():
               print('Digitaste uma opção incorrecta! Tenta Novamente!')
       # SAIR
       case '0':
+        guardar_dados()
         print('| Programa terminado! Caso queira fazer um novo pedido, execute novamente o programa...')
         break
       case _:
