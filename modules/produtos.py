@@ -16,7 +16,7 @@ class Produto:
   
   def mostrar_produto(self):
     print('\n----------PRODUTO----------')
-    print(f'| Id: {self.produto_id}\n | Nome: {self.nome} |\n | Categoria: {self.categoria} |\n | NºSérie: {self.n_serie} |\n | Criado me: {self.produto_criado_em:%d/%m/%Y %H:%M:%S}|\n')
+    print(f'Id: {self.produto_id}\n | Nome: {self.nome} |\n | Categoria: {self.categoria} |\n | NºSérie: {self.n_serie} |\n | Criado me: {self.produto_criado_em:%d/%m/%Y %H:%M:%S}|\n')
     
   def editar(self, nome, categoria, n_serie):
     self.nome = nome
@@ -28,7 +28,20 @@ class Produto:
     Produto.lista_produtos.remove(self)
     print(f'| O produto {self.nome} foi eliminado!')
     
-    
+  #ENCAPSULAR
+  
+  @property
+  def nome(self):
+    return self.__nome
+
+  @nome.setter
+  def nome(self,valor):
+    if not valor or valor.strip() == '':
+      print('| Erro: o nome não pode estar vazio!')
+    else:
+      self.__nome = valor
+  
+  
   # métodos de classe
   @classmethod
   

@@ -76,8 +76,6 @@ def menu_tickets_editar():
   return input('| O que pretendes alterar?')
 
 
-#def menu_ticket()
-
 #MENU PRINCIPAL
 while True:
   op = menu_principal()
