@@ -1,1 +1,0 @@
-print(f"Cria e configura a App!")

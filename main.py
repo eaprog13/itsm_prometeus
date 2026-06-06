@@ -1,1 +1,3 @@
-print(f"arranca a app ")
+from modules.menus import arrancar
+
+arrancar()
