@@ -10,6 +10,15 @@ FROM information_schema.schemata;
 
 ----------------------------------------------------------
 
+SELECT column_name, data_type
+FROM information_schema.columns
+WHERE table_name = 'users';
+
+
+SELECT table_name
+FROM information_schema.tables
+WHERE table_schema = 'public';
+
 --CRIAR E APAGAR TABELAS
 
 --Apagar caso, exista.

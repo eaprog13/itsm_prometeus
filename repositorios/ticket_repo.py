@@ -16,7 +16,7 @@ def abrir_ticket(user_id, tecnico_id, produto_id, categoria_id, prioridade, desc
 def listar_tickets():
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT ticket_id, user_id, tecnico_id, produto_id, categoria_id, prioridade, descricao, estado, criado_em FROM tickets")
+    cursor.execute("SELECT ticket_id, user_id, tecnico_id, produto_id, categoria_id, prioridade, descricao, estado, observacao, criado_em FROM tickets")
     rows = cursor.fetchall()
     conn.close()
     tickets = [Ticket(*row) for row in rows]
@@ -29,7 +29,7 @@ def listar_tickets():
 def obter_ticket(ticket_id):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT ticket_id, user_id, tecnico_id, produto_id, categoria_id, prioridade, descricao, estado, criado_em FROM tickets WHERE ticket_id = %s", (ticket_id,))
+    cursor.execute("SELECT ticket_id, user_id, tecnico_id, produto_id, categoria_id, prioridade, descricao, estado, observacao, criado_em FROM tickets WHERE ticket_id = %s", (ticket_id,))
     row = cursor.fetchone()
     conn.close()
     if row:
@@ -71,3 +71,27 @@ def eliminar_ticket(ticket_id):
     conn.commit()
     conn.close()
     print(f'| Ticket {ticket_id} eliminado com sucesso!')
+    
+def devolver_ticket(ticket_id, observacao):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+        "UPDATE tickets SET estado='devolvido', observacao=%s WHERE ticket_id=%s",
+        (observacao, ticket_id)
+    )
+    conn.commit()
+    conn.close()
+    print(f'| Ticket {ticket_id} devolvido com sucesso!')
+    
+def listar_tickets_por_user(user_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT ticket_id, user_id, tecnico_id, produto_id, categoria_id, prioridade, descricao, estado, observacao, criado_em FROM tickets WHERE user_id = %s", (user_id,))
+    rows = cursor.fetchall()
+    conn.close()
+    tickets = [Ticket(*row) for row in rows]
+    if not tickets:
+        print('| Não tens tickets registados!')
+    for t in tickets:
+        t.mostrar()
+    return tickets
