@@ -1,7 +1,4 @@
-from modules.guardar_db import guardar_dados, carregar_dados
-from modules.users import User
-from modules.produtos import Produto
-from modules.tickets import Ticket
+from repositorios import user_repo, produto_repo, ticket_repo
 
 
 def menu_principal():
@@ -29,7 +26,7 @@ def menu_users_editar():
   print('| 2. email |')
   print('| 3. contacto |')
   print('| 4. tipo |')
-  print('| 5. horario |')
+  print('| 5. turno |')
   print('| 0. Sair |')
   print('|----------DIGITA A OPCAO----------|')
   return input('| O que pretendes alterar?')
@@ -67,9 +64,9 @@ def menu_tickets():
 
 def menu_tickets_editar():
   print('\n|----------MENU EDITAR Ticket----------|')
-  print('| 1. user_id |')
-  print('| 2. Tecnico_id |')
-  print('| 3. Produto_id |')
+  print('| 1. Tecnico_id |')
+  print('| 2. Produto_id |')
+  print('| 3. Categoria_id |')
   print('| 4. Prioridade |')
   print('| 5. Descrição |')
   print('| 0. Sair |')
@@ -77,226 +74,188 @@ def menu_tickets_editar():
   return input('| O que pretendes alterar?')
 
 
-#MENU PRINCIPAL
 def arrancar():
-  carregar_dados()
 
   while True:
     op = menu_principal()
     match op:
+
       # MENU USER
       case '1':
-        while True: 
+        while True:
           op_user = menu_users()
-          
           match op_user:
-          #SUBMENU USER
+
             case '1':
               nome = input('| Digita o teu nome: ')
               email = input('| Digita o teu email: ')
               contacto = input('| Digita o teu contacto: ')
               tipo = input('| Digita o tipo user: ')
-              horario = input('| Digita o teu horário: ')
-              User.criar(nome, email, contacto, tipo, horario)
-                      
+              turno = input('| Digita o teu turno: ')
+              user_repo.criar_user(nome, email, contacto, tipo, turno)
+
             case '2':
-              User.consultar_lista()
-              user_id = int(input('| Qual é o ID do User?'))
-              u = User.lista_users[user_id - 1]
-              
-              while True:
-                op_editar = menu_users_editar()
-                
-                match op_editar:
-                  case '1':
-                    u.nome = input('| Qual é o novo nome? ')                  
-                  case '2':
-                    u.email = input('| Qual é o novo email? ') 
-                    print(f'| O email do {u.nome} com o id {user_id} foi alterado com sucesso!')                
-                  case '3':
-                    u.contacto = input('| Qual é o novo contacto? ')                  
-                  case '4':
-                    u.tipo = input('| Qual é o novo tipo? ')                 
-                  case '5':
-                    u.horario = input('| Qual é o novo horario? ')                 
-                  case '0':
-                    break            
-                  case _:
-                    print('Digitaste uma opção incorrecta! Tenta Novamente!')
-                      
+              user_repo.listar_users()
+              user_id = int(input('| Qual é o ID do User? '))
+              u = user_repo.obter_user(user_id)
+
+              if u:
+                while True:
+                  op_editar = menu_users_editar()
+                  match op_editar:
+                    case '1':
+                      u.nome = input('| Qual é o novo nome? ')
+                    case '2':
+                      u.email = input('| Qual é o novo email? ')
+                    case '3':
+                      u.contacto = input('| Qual é o novo contacto? ')
+                    case '4':
+                      u.tipo = input('| Qual é o novo tipo? ')
+                    case '5':
+                      u.turno = input('| Qual é o novo turno? ')
+                    case '0':
+                      user_repo.editar_user(user_id, u.nome, u.email, u.contacto, u.tipo, u.turno)
+                      break
+                    case _:
+                      print('| Digitaste uma opção incorrecta! Tenta Novamente!')
+
             case '3':
-              User.consultar_lista()                     
+              user_repo.listar_users()
+
             case '4':
-              User.consultar_lista()            
+              user_repo.listar_users()
               u_id = int(input('| Indica o ID do User que queres eliminar: '))
-              
-              #CORRER A LISTA COM O USER_ID
-              for user in User.lista_users:
-                if user.user_id == u_id:
-                  
-                  op_eliminar = input(f'| Tens a certeza que queres eliminar o user:{user.user_id} nome:{user.nome}? (sim ou nao)-> ')
-                  
-                  if op_eliminar.lower() == 'sim':
-                    user.eliminar()
-                  else:
-                    print(f'| O {user.nome} não foi eliminado!')
-                  break                  
+              op_eliminar = input(f'| Tens a certeza que queres eliminar o user {u_id}? (sim ou nao)-> ')
+              if op_eliminar.lower() == 'sim':
+                user_repo.eliminar_user(u_id)
               else:
-                print(f'| Opção não existente! Digita uma opção correcta! |')                            
+                print(f'| O user {u_id} não foi eliminado!')
+
             case '0':
               break
             case _:
               print('| Digita uma opção válida!')
-          
-      # MENU PRODUTOS   
+
+      # MENU PRODUTOS
       case '2':
-        while True: 
+        while True:
           op_produto = menu_produtos()
-          
           match op_produto:
-          #SUBMENU PRODUTO
+
             case '1':
-              nome = input('| Digita o teu nome: ')
+              nome = input('| Digita o nome do produto: ')
               categoria = input('| Digita a categoria do produto: ')
               n_serie = input('| Digita o número de série: ')
-              Produto.criar(nome, categoria, n_serie)
-                      
+              produto_repo.criar_produto(nome, categoria, n_serie)
+
             case '2':
-              Produto.consultar_lista()
-              produto_id = int(input('| Qual é o ID do Produto?'))
-              p = Produto.lista_produtos[produto_id - 1]
-              
-              while True:
-                op_editar = menu_produtos_editar()
-                
-                match op_editar:
-                  case '1':
-                    p.nome = input('| Qual é o novo nome? ')                  
-                  case '2':
-                    p.categoria = input('| Qual é a nova categoria do produto? ')                 
-                  case '3':
-                    p.n_serie = input('| Qual é o número de série correcto? ')                  
-                  case '0':
-                    break            
-                  case _:
-                    print('Digitaste uma opção incorrecta! Tenta Novamente!')
-                      
+              produto_repo.listar_produtos()
+              produto_id = int(input('| Qual é o ID do Produto? '))
+              p = produto_repo.obter_produto(produto_id)
+
+              if p:
+                while True:
+                  op_editar = menu_produtos_editar()
+                  match op_editar:
+                    case '1':
+                      p.nome = input('| Qual é o novo nome? ')
+                    case '2':
+                      p.categoria = input('| Qual é a nova categoria? ')
+                    case '3':
+                      p.n_serie = input('| Qual é o número de série correcto? ')
+                    case '0':
+                      produto_repo.editar_produto(produto_id, p.nome, p.categoria, p.n_serie)
+                      break
+                    case _:
+                      print('| Digitaste uma opção incorrecta! Tenta Novamente!')
+
             case '3':
-              Produto.consultar_lista()     
-                        
+              produto_repo.listar_produtos()
+
             case '4':
-              Produto.consultar_lista()            
-              p_id = int(input('| Indica o ID do User que queres eliminar: '))
-              
-              #CORRER A LISTA COM O PRODUTO_ID
-              for produto in Produto.lista_produtos:
-                if produto.produto_id == p_id:
-                  
-                  op_eliminar = input(f'| Tens a certeza que queres eliminar o user:{produto.produto_id} nome:{produto.nome}? (sim ou nao)-> ')
-                  
-                  if op_eliminar.lower() == 'sim':
-                    produto.eliminar()
-                  else:
-                    print(f'| O {produto.nome} não foi eliminado!')
-                  break                  
+              produto_repo.listar_produtos()
+              p_id = int(input('| Indica o ID do produto que queres eliminar: '))
+              op_eliminar = input(f'| Tens a certeza que queres eliminar o produto {p_id}? (sim ou nao)-> ')
+              if op_eliminar.lower() == 'sim':
+                produto_repo.eliminar_produto(p_id)
               else:
-                print(f'| Opção não existente! Digita uma opção correcta! |')                            
+                print(f'| O produto {p_id} não foi eliminado!')
+
             case '0':
-              guardar_dados()
-              print('| Programa encerrado!')
               break
             case _:
-              print('Digita uma opção válida!')
-                  
+              print('| Digita uma opção válida!')
 
       # MENU TICKETS
       case '3':
-        while True: 
+        while True:
           op_ticket = menu_tickets()
-          
           match op_ticket:
-          #SUBMENU TICKET
+
             case '1':
-              user_id = input('| Digita o user_id: ')
-              tecnico_id = input('| Digita o ID do técnico : ')
-              produto_id = input('| Digita o ID do produto: ')
-              prioridade = input('| Indica a prioridade: ')
-              descricao = input('| Descreve o problema de forma concisa e clara: ')
-              
-              Ticket.abrir(user_id, tecnico_id, produto_id, prioridade, descricao)
-                      
+              user_id = int(input('| Digita o user_id: '))
+              tecnico_id = int(input('| Digita o ID do técnico: '))
+              produto_id = int(input('| Digita o ID do produto: '))
+              categoria_id = int(input('| Digita o ID da categoria: '))
+              prioridade = input('| Indica a prioridade (Alta/Média/Baixa): ')
+              descricao = input('| Descreve o problema: ')
+              ticket_repo.abrir_ticket(user_id, tecnico_id, produto_id, categoria_id, prioridade, descricao)
+
             case '2':
-              Ticket.consultar_lista()
-              ticket_id = int(input('| Qual é o ID do ticket?'))
-              t = Ticket.lista_tickets[ticket_id - 1]
-              
-              while True:
-                op_editar = menu_tickets_editar()
-                
-                match op_editar:
-                  case '1':
-                    t.user_id = input('| Qual é o ID do user correcto? ')                  
-                  case '2':
-                    t.tecnico_id = input('| Qual é o ID do técnico correcto? ')                 
-                  case '3':
-                    t.produto_id= input('| Qual é o ID do produto correcto? ')                  
-                  case '4':
-                    t.prioridade= input('| Actualiza a prioridade: ')                  
-                  case '5':
-                    t.descricao= input('| Actualiza a descrição: ')                  
-                  case '0':
-                    break            
-                  case _:
-                    print('Digitaste uma opção incorrecta! Tenta Novamente!')
-                      
+              ticket_repo.listar_tickets()
+              ticket_id = int(input('| Qual é o ID do ticket? '))
+              t = ticket_repo.obter_ticket(ticket_id)
+
+              if t:
+                while True:
+                  op_editar = menu_tickets_editar()
+                  match op_editar:
+                    case '1':
+                      t.tecnico_id = int(input('| Qual é o ID do técnico correcto? '))
+                    case '2':
+                      t.produto_id = int(input('| Qual é o ID do produto correcto? '))
+                    case '3':
+                      t.categoria_id = int(input('| Qual é o ID da categoria correcta? '))
+                    case '4':
+                      t.prioridade = input('| Actualiza a prioridade: ')
+                    case '5':
+                      t.descricao = input('| Actualiza a descrição: ')
+                    case '0':
+                      ticket_repo.editar_ticket(ticket_id, t.tecnico_id, t.produto_id, t.categoria_id, t.prioridade, t.descricao)
+                      break
+                    case _:
+                      print('| Digitaste uma opção incorrecta! Tenta Novamente!')
+
             case '3':
-              Ticket.consultar_lista()     
-            
-            case '4': 
-              Ticket.consultar_lista()
-              t_id = int(input('| Indica o ID do ticket a fechar:'))
-              for ticket in Ticket.lista_tickets:
-                if ticket.ticket_id == t_id:
-                  ticket.fechar()
-                  break
-              else:
-                print('Opção Inválida, o ticket ainda está aberto!')
-                  
+              ticket_repo.listar_tickets()
+
+            case '4':
+              ticket_repo.listar_tickets()
+              t_id = int(input('| Indica o ID do ticket a fechar: '))
+              ticket_repo.fechar_ticket(t_id)
+
             case '5':
-              Ticket.consultar_lista()
-              t_id = int(input('| Indica o ID do ticket a fechar:'))
-              for ticket in Ticket.lista_tickets:
-                if ticket.ticket_id == t_id:
-                  ticket.reabrir()
-                  break
-              else:
-                print('Opção Inválida, o ticket ainda está fechado!')
-                        
+              ticket_repo.listar_tickets()
+              t_id = int(input('| Indica o ID do ticket a reabrir: '))
+              ticket_repo.reabrir_ticket(t_id)
+
             case '6':
-              Ticket.consultar_lista()            
-              t_id = int(input('| Indica o ID do User que queres eliminar: '))
-              
-              #CORRER A LISTA COM O TICKET_ID
-              for ticket in Ticket.lista_tickets:
-                if ticket.ticket_id == t_id:
-                  # duplicado com o método eliminar, não sei se faço a condição no menu ou se uso o método self para isso...
-                  op_eliminar = input(f'| Tens a certeza que queres eliminar o user:{ticket.ticket_id}? (sim ou nao)-> ')
-                  
-                  if op_eliminar.lower() == 'sim':
-                    ticket.eliminar()
-                  else:
-                    print(f'| O {ticket.ticket_id} não foi eliminado!')
-                  break                  
+              ticket_repo.listar_tickets()
+              t_id = int(input('| Indica o ID do ticket a eliminar: '))
+              op_eliminar = input(f'| Tens a certeza que queres eliminar o ticket {t_id}? (sim ou nao)-> ')
+              if op_eliminar.lower() == 'sim':
+                ticket_repo.eliminar_ticket(t_id)
               else:
-                print(f'| Opção não existente! Digita uma opção correcta! |')                            
+                print(f'| O ticket {t_id} não foi eliminado!')
+
             case '0':
               break
             case _:
-              print('Digitaste uma opção incorrecta! Tenta Novamente!')
+              print('| Digitaste uma opção incorrecta! Tenta Novamente!')
+
       # SAIR
       case '0':
         print('| Programa terminado! Caso queira fazer um novo pedido, execute novamente o programa...')
         break
       case _:
-        print('Digita uma opção válida!')
-    
+        print('| Digita uma opção válida!')
