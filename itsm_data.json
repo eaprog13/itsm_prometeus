@@ -1,0 +1,37 @@
+{
+  "users": [
+    {
+      "user_id": 1,
+      "nome": "asdsa",
+      "email": "asd",
+      "contacto": "asd",
+      "tipo": "Noit",
+      "horario": "asd"
+    },
+    {
+      "user_id": 2,
+      "nome": "Andre",
+      "email": "joao@exemplo.pt",
+      "contacto": "1234512312",
+      "tipo": "User",
+      "horario": "Tarde"
+    },
+    {
+      "user_id": 3,
+      "nome": "Bárbara",
+      "email": "barbara@exemplo.pt",
+      "contacto": "910000003",
+      "tipo": "User",
+      "horario": "Noite"
+    }
+  ],
+  "produtos": [
+    {
+      "produto_id": 1,
+      "nome": "RAto",
+      "categoria": "HArdware",
+      "n_serie": "1232143252"
+    }
+  ],
+  "tickets": []
+}
