@@ -19,8 +19,12 @@ def login():
             return u
         else:
             tentativas -= 1
-            if tentativas > 0:
+            if tentativas >= 2:
+                print(f'| Inseriste mal o email ou password! Tens apenas {tentativas} tentativas!')
+            elif tentativas >= 1:
                 print(f'| Inseriste mal o email ou password! Tens apenas {tentativas} tentativa!')
             else:
-                print('| Número máximo de tentativas atingido. A sair...')
+                print('| Número máximo de tentativas atingido! Conta Bloqueada!')
+                print('| Contacta o suporte!')
+                print('| Programa terminado...')
                 return None
