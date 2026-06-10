@@ -22,14 +22,14 @@ def seed_categorias():
 
 def seed_users():
     users = [
-        ('Ana Silva',    'ana.silva@itsm.pt',    '912000001', 'admin',   'Segunda a Sexta'),
-        ('Bruno Costa',  'bruno.costa@itsm.pt',  '912000002', 'tecnico', 'Segunda a Sexta'),
-        ('Carla Mendes', 'carla.mendes@itsm.pt', '912000003', 'tecnico', 'Turnos'),
-        ('David Lopes',  'david.lopes@itsm.pt',  '912000004', 'user',    'Segunda a Sexta'),
-        ('Eva Martins',  'eva.martins@itsm.pt',  '912000005', 'user',    'Segunda a Sexta'),
+        ('Ana Silva',    'ana.silva@itsm.pt',    '912000001', 'admin',   1, 'Manhã'),
+        ('Bruno Costa',  'bruno.costa@itsm.pt',  '912000002', 'tecnico', 2, 'Manhã'),
+        ('Carla Mendes', 'carla.mendes@itsm.pt', '912000003', 'tecnico', 2, 'Tarde'),
+        ('David Lopes',  'david.lopes@itsm.pt',  '912000004', 'user',    3, 'Manhã'),
+        ('Eva Martins',  'eva.martins@itsm.pt',  '912000005', 'user',    4, 'Manhã'),
     ]
-    for nome, email, contacto, tipo, horario in users:
-        user_repo.criar_user(nome, email, contacto, tipo, horario)
+    for nome, email, contacto, tipo, departamento_id, turno in users:
+        user_repo.criar_user(nome, email, contacto, tipo, departamento_id, turno)
     print('| Users inseridos!')
 
 def seed_produtos():

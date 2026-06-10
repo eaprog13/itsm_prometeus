@@ -1,31 +1,41 @@
+-- 1. DEPARTAMENTOS
+CREATE TABLE departamentos (
+    departamento_id  SERIAL        PRIMARY KEY,
+    nome             VARCHAR(100)  NOT NULL UNIQUE,
+    descricao        TEXT
+);
+
+-- 2. CATEGORIAS
 CREATE TABLE categorias (
     categoria_id  SERIAL          PRIMARY KEY,
     nome          VARCHAR(100)    NOT NULL UNIQUE,
-    descricao     TEXT,           NOT NULL,
+    descricao     TEXT            NOT NULL,
     criado_em     TIMESTAMP       DEFAULT NOW()
 );
 
--- 2. USERS
+-- 3. USERS
 CREATE TABLE users (
-    user_id       SERIAL          PRIMARY KEY,
-    nome          VARCHAR(100)    NOT NULL,
-    email         VARCHAR(150)    NOT NULL UNIQUE,
-    contacto      VARCHAR(20),    NOT NULL UNIQUE,
-    tipo          VARCHAR(50)     NOT NULL, -- 'admin', 'tecnico', 'user', 'it'
-    horario       VARCHAR(50),    NOT NULL,
-    criado_em     TIMESTAMP       DEFAULT NOW()
+    user_id          SERIAL        PRIMARY KEY,
+    nome             VARCHAR(100)  NOT NULL,
+    email            VARCHAR(150)  NOT NULL UNIQUE,
+    contacto         VARCHAR(20)   NOT NULL UNIQUE,
+    tipo             VARCHAR(50)   NOT NULL,
+    departamento_id  INT           REFERENCES departamentos(departamento_id),
+    turno          VARCHAR(50)   NOT NULL,
+    criado_em        TIMESTAMP     DEFAULT NOW()
 );
 
--- 3. PRODUTOS
+-- 4. PRODUTOS
 CREATE TABLE produtos (
     produto_id    SERIAL          PRIMARY KEY,
     nome          VARCHAR(100)    NOT NULL,
-    categoria     VARCHAR(100),   NOT NULL,
+    categoria     VARCHAR(100)    NOT NULL,
+    marca         VARCHAR(100)    NOT NULL,
     n_serie       VARCHAR(100)    NOT NULL UNIQUE,
     criado_em     TIMESTAMP       DEFAULT NOW()
 );
 
--- 4. TICKETS  DEPENDÊNCIA
+-- 5. TICKETS
 CREATE TABLE tickets (
     ticket_id     SERIAL          PRIMARY KEY,
     user_id       INT             NOT NULL REFERENCES users(user_id),

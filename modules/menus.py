@@ -91,8 +91,9 @@ def arrancar():
               email = input('| Digita o teu email: ')
               contacto = input('| Digita o teu contacto: ')
               tipo = input('| Digita o tipo user: ')
+              departamento_id = input('| Digita o departamento: ')
               turno = input('| Digita o teu turno: ')
-              user_repo.criar_user(nome, email, contacto, tipo, turno)
+              user_repo.criar_user(nome, email, contacto, tipo, departamento_id, turno)
 
             case '2':
               user_repo.listar_users()
@@ -112,6 +113,8 @@ def arrancar():
                     case '4':
                       u.tipo = input('| Qual é o novo tipo? ')
                     case '5':
+                      u.departamento_id = input('| Qual é o novo departamento? ')
+                    case '6':
                       u.turno = input('| Qual é o novo turno? ')
                     case '0':
                       user_repo.editar_user(user_id, u.nome, u.email, u.contacto, u.tipo, u.turno)
@@ -145,8 +148,9 @@ def arrancar():
             case '1':
               nome = input('| Digita o nome do produto: ')
               categoria = input('| Digita a categoria do produto: ')
+              marca = input('| Digita a marca: ')
               n_serie = input('| Digita o número de série: ')
-              produto_repo.criar_produto(nome, categoria, n_serie)
+              produto_repo.criar_produto(nome, categoria, marca, n_serie)
 
             case '2':
               produto_repo.listar_produtos()
@@ -162,9 +166,11 @@ def arrancar():
                     case '2':
                       p.categoria = input('| Qual é a nova categoria? ')
                     case '3':
+                      p.marca = input('| Qual é a marca correcta? ')
+                    case '4':
                       p.n_serie = input('| Qual é o número de série correcto? ')
                     case '0':
-                      produto_repo.editar_produto(produto_id, p.nome, p.categoria, p.n_serie)
+                      produto_repo.editar_produto(produto_id, p.nome, p.categoria, p.marca, p.n_serie)
                       break
                     case _:
                       print('| Digitaste uma opção incorrecta! Tenta Novamente!')
@@ -255,7 +261,7 @@ def arrancar():
 
       # SAIR
       case '0':
-        guardar_dados()
+        print('| Dados guardados com sucesso!')
         print('| Programa terminado! Caso queira fazer um novo pedido, execute novamente o programa...')
         break
       case _:

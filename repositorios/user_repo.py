@@ -1,12 +1,12 @@
 from modules.ligar_db import get_connection
 from modules.users import User
 
-def criar_user(nome, email, contacto, tipo, turno):
+def criar_user(nome, email, contacto, tipo, departamento_id, turno):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
-        "INSERT INTO users (nome, email, contacto, tipo, turno) VALUES (%s, %s, %s, %s, %s) RETURNING user_id",
-        (nome, email, contacto, tipo, turno)
+        "INSERT INTO users (nome, email, contacto, tipo, departamento_id, turno) VALUES (%s, %s, %s, %s, %s, %s) RETURNING user_id",
+        (nome, email, contacto, tipo, departamento_id, turno)
     )
     user_id = cursor.fetchone()[0]
     conn.commit()
@@ -16,7 +16,7 @@ def criar_user(nome, email, contacto, tipo, turno):
 def listar_users():
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT user_id, nome, email, contacto, tipo, turno, criado_em FROM users")
+    cursor.execute("SELECT user_id, nome, email, contacto, tipo, departamento_id, turno, criado_em FROM users")
     rows = cursor.fetchall()
     conn.close()
     users = [User(*row) for row in rows]
@@ -29,7 +29,7 @@ def listar_users():
 def obter_user(user_id):
     conn = get_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT user_id, nome, email, contacto, tipo, turno, criado_em FROM users WHERE user_id = %s", (user_id,))
+    cursor.execute("SELECT user_id, nome, email, contacto, tipo, departamento_id, turno, criado_em FROM users WHERE user_id = %s", (user_id,))
     row = cursor.fetchone()
     conn.close()
     if row:
@@ -37,12 +37,12 @@ def obter_user(user_id):
     print(f'| User {user_id} não encontrado!')
     return None
 
-def editar_user(user_id, nome, email, contacto, tipo, turno):
+def editar_user(user_id, nome, email, contacto, tipo, departamento_id, turno):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
-        "UPDATE users SET nome=%s, email=%s, contacto=%s, tipo=%s, turno=%s WHERE user_id=%s",
-        (nome, email, contacto, tipo, turno, user_id)
+        "UPDATE users SET nome=%s, email=%s, contacto=%s, tipo=%s, departamento_id=%s, turno=%s WHERE user_id=%s",
+        (nome, email, contacto, tipo, departamento_id, turno, user_id)
     )
     conn.commit()
     conn.close()
