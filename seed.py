@@ -27,11 +27,11 @@ def seed_categorias():
 
 def seed_users():
     users = [
-        ('Ana Silva',    'ana.silva@itsm.pt',    '912000001', 'admin',   1, 'Manhã', 'admin123'),
-        ('Bruno Costa',  'bruno.costa@itsm.pt',  '912000002', 'tecnico', 2, 'Manhã', 'tecnico123'),
-        ('Carla Mendes', 'carla.mendes@itsm.pt', '912000003', 'tecnico', 2, 'Tarde', 'tecnico456'),
-        ('David Lopes',  'david.lopes@itsm.pt',  '912000004', 'user',    3, 'Manhã', 'user123'),
-        ('Eva Martins',  'eva.martins@itsm.pt',  '912000005', 'user',    4, 'Manhã', 'user456'),
+        ('Ana Silva',    'ana.silva@itsm.pt',    '912000001', 'admin',   1, 'manha', 'admin123'),
+        ('Bruno Costa',  'bruno.costa@itsm.pt',  '912000002', 'tecnico', 2, 'tarde', 'tecnico123'),
+        ('Carla Mendes', 'carla.mendes@itsm.pt', '912000003', 'tecnico', 2, 'tarde', 'tecnico456'),
+        ('David Lopes',  'david.lopes@itsm.pt',  '912000004', 'user',    3, 'manha', 'user123'),
+        ('Eva Martins',  'eva.martins@itsm.pt',  '912000005', 'user',    4, 'manha', 'user456'),
     ]
     for nome, email, contacto, tipo, departamento_id, turno, password in users:
         user_repo.criar_user(nome, email, contacto, tipo, departamento_id, turno, password)

@@ -11,4 +11,4 @@ class Produto:
 
     def mostrar(self):
         print('\n----------PRODUTO----------')
-        print(f'| Id: {self.produto_id}\n | Nome: {self.nome}\n | Categoria: {self.categoria}\n | Marca: {self.marca}\n | NºSérie: {self.n_serie}\n | Criado em: {self.criado_em:%d/%m/%Y %H:%M:%S}\n')
+        print(f'Id: {self.produto_id}\n | Nome: {self.nome}\n | Categoria: {self.categoria}\n | Marca: {self.marca}\n | NºSérie: {self.n_serie}\n | Criado em: {self.criado_em:%d/%m/%Y %H:%M:%S}\n')

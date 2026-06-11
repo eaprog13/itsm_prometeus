@@ -1,8 +1,13 @@
 from repositorios import user_repo, produto_repo, ticket_repo, departamento_repo, categoria_repo
+import os
+
+def limpar_ecra():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 # ── MENUS DE NAVEGAÇÃO ──────────────────────────────────────────
 
 def menu_principal_admin():
+    limpar_ecra()
     print('\n|----------ITSM PROMETEUS - ADMIN----------|')
     print('| 1. Menu Users                            |')
     print('| 2. Menu Produtos                         |')
@@ -14,6 +19,7 @@ def menu_principal_admin():
     return input('| Opção: ')
 
 def menu_principal_tecnico():
+    limpar_ecra()
     print('\n|----------ITSM PROMETEUS - TÉCNICO--------|')
     print('| 1. Menu Tickets                          |')
     print('| 0. Sair                                  |')
@@ -21,6 +27,7 @@ def menu_principal_tecnico():
     return input('| Opção: ')
 
 def menu_principal_user():
+    limpar_ecra()
     print('\n|----------ITSM PROMETEUS - USER-----------|')
     print('| 1. Abrir Ticket                          |')
     print('| 2. Consultar os meus Tickets             |')
@@ -29,6 +36,7 @@ def menu_principal_user():
     return input('| Opção: ')
 
 def menu_users():
+    limpar_ecra()
     print('\n|----------MENU USERS----------|')
     print('| 1. Criar User                |')
     print('| 2. Editar User               |')
@@ -39,6 +47,7 @@ def menu_users():
     return input('| Opção: ')
 
 def menu_users_editar():
+    limpar_ecra()
     print('\n|----------EDITAR USER---------|')
     print('| 1. Nome                      |')
     print('| 2. Email                     |')
@@ -52,6 +61,7 @@ def menu_users_editar():
     return input('| O que pretendes alterar? ')
 
 def menu_produtos():
+    limpar_ecra()
     print('\n|----------MENU PRODUTOS-------|')
     print('| 1. Criar Produto             |')
     print('| 2. Editar Produto            |')
@@ -62,6 +72,7 @@ def menu_produtos():
     return input('| Opção: ')
 
 def menu_produtos_editar():
+    limpar_ecra()
     print('\n|----------EDITAR PRODUTO------|')
     print('| 1. Nome                      |')
     print('| 2. Categoria                 |')
@@ -72,6 +83,7 @@ def menu_produtos_editar():
     return input('| O que pretendes alterar? ')
 
 def menu_tickets_admin():
+    limpar_ecra()
     print('\n|----------MENU TICKETS--------|')
     print('| 1. Criar Ticket              |')
     print('| 2. Editar Ticket             |')
@@ -84,6 +96,7 @@ def menu_tickets_admin():
     return input('| Opção: ')
 
 def menu_tickets_tecnico():
+    limpar_ecra()
     print('\n|----------MENU TICKETS--------|')
     print('| 1. Consultar Tickets         |')
     print('| 2. Editar Ticket             |')
@@ -95,6 +108,7 @@ def menu_tickets_tecnico():
     return input('| Opção: ')
 
 def menu_tickets_editar():
+    limpar_ecra()
     print('\n|----------EDITAR TICKET-------|')
     print('| 1. Técnico                   |')
     print('| 2. Produto                   |')
@@ -106,6 +120,7 @@ def menu_tickets_editar():
     return input('| O que pretendes alterar? ')
 
 def menu_departamentos():
+    limpar_ecra()
     print('\n|----------MENU DEPARTAMENTOS--|')
     print('| 1. Criar Departamento        |')
     print('| 2. Editar Departamento       |')
@@ -116,6 +131,7 @@ def menu_departamentos():
     return input('| Opção: ')
 
 def menu_categorias():
+    limpar_ecra()
     print('\n|----------MENU CATEGORIAS-----|')
     print('| 1. Criar Categoria           |')
     print('| 2. Editar Categoria          |')
@@ -141,7 +157,7 @@ def submenu_users():
                 tipo = input('| Tipo (admin/tecnico/user): ')
                 departamento_repo.listar_departamentos()
                 departamento_id = int(input('| ID do departamento: '))
-                turno = input('| Turno (Manhã/Tarde/Noite): ')
+                turno = input('| Turno (Manha/Tarde/Noite): ')
                 password = input('| Password: ')
                 user_repo.criar_user(nome, email, contacto, tipo, departamento_id, turno, password)
 
@@ -377,6 +393,7 @@ def submenu_tickets_user(user_logado):
                 ticket_repo.listar_tickets_por_user(user_logado.user_id)
 
             case '0':
+                print('Programa terminado, assim que possível o ticket será resolvido!')
                 break
             case _:
                 print('| Opção inválida!')
@@ -452,7 +469,7 @@ def submenu_categorias():
                 print('| Opção inválida!')
 
 
-# MENU DE ARRANQUE DO PROGRAMAS
+# MENU DE ARRANQUE DO PROGRAMA
 
 def arrancar(user_logado):
     print(f'\n| Bem-vindo/a, {user_logado.nome}! Perfil: {user_logado.tipo}')
@@ -473,6 +490,7 @@ def arrancar(user_logado):
                     submenu_categorias()
                 case '0':
                     print('| Programa terminado!')
+                    print('| Caso queiras alterar, inicia o programa novamente, até breve!')                    
                     break
                 case _:
                     print('| Opção inválida!')
@@ -484,6 +502,7 @@ def arrancar(user_logado):
                     submenu_tickets_tecnico(user_logado)
                 case '0':
                     print('| Programa terminado!')
+                    print('| Caso queiras alterar, inicia o programa novamente, até breve!')
                     break
                 case _:
                     print('| Opção inválida!')

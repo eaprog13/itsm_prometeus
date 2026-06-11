@@ -9,4 +9,4 @@ class Categoria:
 
     def mostrar(self):
         print('\n----------CATEGORIA----------')
-        print(f'| Id: {self.categoria_id}\n | Nome: {self.nome}\n | Descrição: {self.descricao}\n | Criado em: {self.criado_em:%d/%m/%Y %H:%M:%S}\n')
+        print(f'Id: {self.categoria_id}\n | Nome: {self.nome}\n | Descrição: {self.descricao}\n | Criado em: {self.criado_em:%d/%m/%Y %H:%M:%S}\n')

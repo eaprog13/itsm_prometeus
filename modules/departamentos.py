@@ -6,4 +6,4 @@ class Departamento:
 
     def mostrar(self):
         print('\n----------DEPARTAMENTO----------')
-        print(f'| Id: {self.departamento_id}\n | Nome: {self.nome}\n | Descrição: {self.descricao}\n')
+        print(f'Id: {self.departamento_id}\n | Nome: {self.nome}\n | Descrição: {self.descricao}\n')
