@@ -143,7 +143,6 @@ def menu_categorias():
 
 
 
-
 # ── LÓGICA DOS SUBMENUS ─────────────────────────────────────────
 
 def submenu_users():

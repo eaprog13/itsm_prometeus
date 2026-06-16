@@ -58,8 +58,6 @@ class User:
 
 
 """ MENUS """
-
-from modules.guardar_db import guardar_dados, carregar_dados
 from modules.users import User
 from modules.produtos import Produto
 from modules.tickets import Ticket
@@ -598,10 +596,3 @@ def get_connection():
     from modules.menus import arrancar
 
 arrancar()
-
-""" LIGAR DB """
-from modules.db import get_connection
-
-conn = get_connection()
-print("Conexão OK")
-conn.close()
