@@ -1,4 +1,4 @@
-from datetime import datetime
+""" from datetime import datetime
 
 
 class User:
@@ -596,3 +596,10 @@ def get_connection():
     from modules.menus import arrancar
 
 arrancar()
+
+""" LIGAR DB """
+from modules.db import get_connection
+
+conn = get_connection()
+print("Conexão OK")
+conn.close() """
