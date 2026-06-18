@@ -57,7 +57,7 @@ class User:
 
 
 
-""" MENUS """
+ MENUS 
 from modules.users import User
 from modules.produtos import Produto
 from modules.tickets import Ticket
@@ -359,11 +359,11 @@ def arrancar():
         print('Digita uma opção válida!')
     
     
-    """ TICKETS """
+    TICKETS 
     
     from datetime import datetime
-""" from users import user_id
-from produtos import produto_id  """
+from users import user_id
+from produtos import produto_id  
 
 
 class Ticket:
@@ -428,7 +428,7 @@ class Ticket:
         
         
         
-        """ PRODUTOS """
+         PRODUTOS 
         
         
         from datetime import datetime
@@ -492,7 +492,7 @@ class Produto:
         p.mostrar_produto()   
     
     
-    """ GUARDAR em json """
+    GUARDAR em json 
     
     import json
 import os
@@ -579,7 +579,7 @@ def carregar_dados():
 
     print('| Dados carregados com sucesso!')  
     
-    """ DB PARA POSTGRES """
+    DB PARA POSTGRES 
     
     import psycopg
 
@@ -591,13 +591,13 @@ def get_connection():
         password="postgres"
     )
     
-    """ MAIN """
+    MAIN 
     
     from modules.menus import arrancar
 
 arrancar()
 
-""" LIGAR DB """
+ LIGAR DB 
 from modules.db import get_connection
 
 conn = get_connection()

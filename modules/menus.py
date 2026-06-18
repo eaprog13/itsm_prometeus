@@ -103,6 +103,7 @@ def menu_tickets_tecnico():
     print('| 3. Fechar Ticket             |')
     print('| 4. Reabrir Ticket            |')
     print('| 5. Devolver Ticket           |')
+    print('| 6. Consulta Fila             |')
     print('| 0. Sair                      |')
     print('|------------------------------|')
     return input('| Opção: ')
@@ -191,6 +192,7 @@ def submenu_users():
 
             case '3':
                 user_repo.listar_users()
+                input('| Clica enter para continuares...|')
 
             case '4':
                 user_repo.listar_users()
@@ -241,7 +243,7 @@ def submenu_produtos():
 
             case '3':
                 produto_repo.listar_produtos()
-
+                input('| Clica enter para continuares...|')
             case '4':
                 produto_repo.listar_produtos()
                 p_id = int(input('| ID do produto a eliminar: '))
@@ -298,7 +300,7 @@ def submenu_tickets_admin():
 
             case '3':
                 ticket_repo.listar_tickets()
-
+                input('| Clica enter para continuares...|')
             case '4':
                 ticket_repo.listar_tickets()
                 t_id = int(input('| ID do ticket a fechar: '))
@@ -329,7 +331,7 @@ def submenu_tickets_tecnico(user_logado):
         match op:
             case '1':
                 ticket_repo.listar_tickets()
-
+                input('| Clica enter para continuares...|')
             case '2':
                 ticket_repo.listar_tickets()
                 ticket_id = int(input('| ID do ticket a editar: '))
@@ -370,6 +372,10 @@ def submenu_tickets_tecnico(user_logado):
                 observacao = input('| Observação para o user: ')
                 ticket_repo.devolver_ticket(t_id, observacao)
 
+            case '6':
+                ticket_repo.listar_tickets_por_tecnico(user_logado.user_id)
+                input('| Carrega Enter para continuar...')
+                
             case '0':
                 break
             case _:
@@ -386,10 +392,17 @@ def submenu_tickets_user(user_logado):
                 categoria_id = int(input('| ID da categoria: '))
                 prioridade = input('| Prioridade (Alta/Média/Baixa): ')
                 descricao = input('| Descrição do problema: ')
-                ticket_repo.abrir_ticket(user_logado.user_id, None, produto_id, categoria_id, prioridade, descricao)
-
+                # ← já não pede tecnico_id, vai buscar automaticamente
+                tecnico_id = ticket_repo.obter_tecnico_disponivel()
+                if tecnico_id:
+                    ticket_repo.abrir_ticket(user_logado.user_id, tecnico_id, produto_id, categoria_id, prioridade, descricao)
+                else:
+                    print('| Não foi possível atribuir técnico — tenta mais tarde!')
+                input('| Carrega Enter para continuar...')
+                
             case '2':
                 ticket_repo.listar_tickets_por_user(user_logado.user_id)
+                input('| Clica enter para continuares...|')
 
             case '0':
                 print('Programa terminado, assim que possível o ticket será resolvido!')
@@ -417,7 +430,7 @@ def submenu_departamentos():
 
             case '3':
                 departamento_repo.listar_departamentos()
-
+                input('| Clica enter para continuares...|')
             case '4':
                 departamento_repo.listar_departamentos()
                 d_id = int(input('| ID do departamento a eliminar: '))
@@ -452,7 +465,7 @@ def submenu_categorias():
 
             case '3':
                 categoria_repo.listar_categorias()
-
+                input('| Clica enter para continuares...|')
             case '4':
                 categoria_repo.listar_categorias()
                 c_id = int(input('| ID da categoria a eliminar: '))

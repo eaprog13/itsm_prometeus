@@ -7,8 +7,8 @@ class Ticket:
         self.tecnico_id = tecnico_id
         self.produto_id = produto_id
         self.categoria_id = categoria_id
-        self.__estado = estado
-        self.__prioridade = prioridade
+        self.estado = estado
+        self.prioridade = prioridade
         self.descricao = descricao
         self.observacao = observacao
         self.criado_em = criado_em or datetime.now()
@@ -16,27 +16,25 @@ class Ticket:
     @property
     def estado(self):
         return self.__estado
-    
+
     @estado.setter
     def estado(self, valor):
-        tipo_estado = ['aberto', 'fechado']
-        if not valor in tipo_estado:
-            raise ValueError(f'| Estado inválido, escolha 1 dos {tipo_estado} disponíveis!')
-        return self.__estado
-    
-    
+        tipos_validos = ['aberto', 'fechado', 'devolvido']
+        if valor not in tipos_validos:
+            raise ValueError(f'| Estado inválido, escolha um de {tipos_validos}!')
+        self.__estado = valor
+
     @property
     def prioridade(self):
         return self.__prioridade
-    
+
     @prioridade.setter
     def prioridade(self, valor):
-        tipo_prioridade = ['alta', 'média', 'baixa']
-        if valor not in tipo_prioridade:
-            raise ValueError(f'| Prioridade inválida, escolhe uma das {tipo_prioridade} disponíveis!')
-        return self.__prioridade
-    
-    
+        tipos_validos = ['Alta', 'Média', 'Baixa']
+        if valor not in tipos_validos:
+            raise ValueError(f'| Prioridade inválida, escolha uma de {tipos_validos}!')
+        self.__prioridade = valor
+
     def mostrar(self):
         print('\n----------TICKET----------')
-        print(f'Id: {self.ticket_id}\n | User: {self.user_id}\n | Técnico: {self.tecnico_id}\n | Produto: {self.produto_id}\n | Categoria: {self.categoria_id}\n | Estado: {self.estado}\n | Prioridade: {self.prioridade}\n | Descrição: {self.descricao}\n | Observação: {self.observacao}\n | Criado em: {self.criado_em:%d/%m/%Y %H:%M:%S}\n')
+        print(f'| Id: {self.ticket_id}\n | User: {self.user_id}\n | Técnico: {self.tecnico_id}\n | Produto: {self.produto_id}\n | Categoria: {self.categoria_id}\n | Estado: {self.estado}\n | Prioridade: {self.prioridade}\n | Descrição: {self.descricao}\n | Observação: {self.observacao}\n | Criado em: {self.criado_em:%d/%m/%Y %H:%M:%S}\n')
