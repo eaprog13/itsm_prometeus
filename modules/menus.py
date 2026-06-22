@@ -1,4 +1,6 @@
 from repositorios import user_repo, produto_repo, ticket_repo, departamento_repo, categoria_repo
+from modules.erros import input_inteiro, confirmar, executar
+from modules.users import User
 import os
 
 def limpar_ecra():
@@ -98,12 +100,11 @@ def menu_tickets_admin():
 def menu_tickets_tecnico():
     limpar_ecra()
     print('\n|----------MENU TICKETS--------|')
-    print('| 1. Consultar Tickets         |')
-    print('| 2. Editar Ticket             |')
-    print('| 3. Fechar Ticket             |')
-    print('| 4. Reabrir Ticket            |')
-    print('| 5. Devolver Ticket           |')
-    print('| 6. Consulta Fila             |')
+    print('| 1. Os meus Tickets           |')
+    print('| 2. Fechar Ticket             |')
+    print('| 3. Reabrir Ticket            |')
+    print('| 4. Devolver Ticket           |')
+    print('| 5. Consultar Todos           |')
     print('| 0. Sair                      |')
     print('|------------------------------|')
     return input('| Opção: ')
@@ -143,7 +144,6 @@ def menu_categorias():
     return input('| Opção: ')
 
 
-
 # ── LÓGICA DOS SUBMENUS ─────────────────────────────────────────
 
 def submenu_users():
@@ -151,41 +151,44 @@ def submenu_users():
         op = menu_users()
         match op:
             case '1':
-                nome = input('| Nome: ')
-                email = input('| Email: ')
-                contacto = input('| Contacto: ')
-                tipo = input('| Tipo (admin/tecnico/user): ')
-                departamento_repo.listar_departamentos()
-                departamento_id = int(input('| ID do departamento: '))
-                turno = input('| Turno (Manha/Tarde/Noite): ')
-                password = input('| Password: ')
-                user_repo.criar_user(nome, email, contacto, tipo, departamento_id, turno, password)
+                def criar():
+                    nome = input('| Nome: ')
+                    email = input('| Email: ')
+                    contacto = input('| Contacto: ')
+                    tipo = input('| Tipo (admin/tecnico/user): ')
+                    departamento_repo.listar_departamentos()
+                    departamento_id = input_inteiro('| ID do departamento: ')
+                    turno = input('| Turno (Manha/Tarde/Noite): ')
+                    password = input('| Password: ')
+                    user_repo.criar_user(nome, email, contacto, tipo, departamento_id, turno, password)
+                executar(criar)
+                input('| Clica enter para continuares...|')
 
             case '2':
                 user_repo.listar_users()
-                user_id = int(input('| ID do User a editar: '))
+                user_id = input_inteiro('| ID do User a editar: ')
                 u = user_repo.obter_user(user_id)
                 if u:
                     while True:
                         op_editar = menu_users_editar()
                         match op_editar:
                             case '1':
-                                u.nome = input('| Novo nome: ')
+                                executar(lambda: setattr(u, 'nome', input('| Novo nome: ')))
                             case '2':
-                                u.email = input('| Novo email: ')
+                                executar(lambda: setattr(u, 'email', input('| Novo email: ')))
                             case '3':
-                                u.contacto = input('| Novo contacto: ')
+                                executar(lambda: setattr(u, 'contacto', input('| Novo contacto: ')))
                             case '4':
-                                u.tipo = input('| Novo tipo (admin/tecnico/user): ')
+                                executar(lambda: setattr(u, 'tipo', input('| Novo tipo (admin/tecnico/user): ')))
                             case '5':
                                 departamento_repo.listar_departamentos()
-                                u.departamento_id = int(input('| Novo ID do departamento: '))
+                                executar(lambda: setattr(u, 'departamento_id', input_inteiro('| Novo ID do departamento: ')))
                             case '6':
-                                u.turno = input('| Novo turno (Manhã/Tarde/Noite): ')
+                                executar(lambda: setattr(u, 'turno', input('| Novo turno (Manhã/Tarde/Noite): ')))
                             case '7':
-                                u.password = input('| Nova password: ')
+                                executar(lambda: setattr(u, 'password', input('| Nova password: ')))
                             case '0':
-                                user_repo.editar_user(user_id, u.nome, u.email, u.contacto, u.tipo, u.departamento_id, u.turno, u.password)
+                                executar(lambda: user_repo.editar_user(user_id, u.nome, u.email, u.contacto, u.tipo, u.departamento_id, u.turno, u.password))
                                 break
                             case _:
                                 print('| Opção incorrecta!')
@@ -196,10 +199,9 @@ def submenu_users():
 
             case '4':
                 user_repo.listar_users()
-                u_id = int(input('| ID do User a eliminar: '))
-                op_eliminar = input(f'| Tens a certeza? (sim/nao): ')
-                if op_eliminar.lower() == 'sim':
-                    user_repo.eliminar_user(u_id)
+                u_id = input_inteiro('| ID do User a eliminar: ')
+                if confirmar('| Tens a certeza? (sim/nao): '):
+                    executar(lambda: user_repo.eliminar_user(u_id))
                 else:
                     print(f'| User {u_id} não foi eliminado!')
 
@@ -213,30 +215,33 @@ def submenu_produtos():
         op = menu_produtos()
         match op:
             case '1':
-                nome = input('| Nome do produto: ')
-                categoria = input('| Categoria: ')
-                marca = input('| Marca: ')
-                n_serie = input('| Número de série: ')
-                produto_repo.criar_produto(nome, categoria, marca, n_serie)
+                def criar():
+                    nome = input('| Nome do produto: ')
+                    categoria = input('| Categoria: ')
+                    marca = input('| Marca: ')
+                    n_serie = input('| Número de série: ')
+                    produto_repo.criar_produto(nome, categoria, marca, n_serie)
+                executar(criar)
+                input('| Clica enter para continuares...|')
 
             case '2':
                 produto_repo.listar_produtos()
-                produto_id = int(input('| ID do Produto a editar: '))
+                produto_id = input_inteiro('| ID do Produto a editar: ')
                 p = produto_repo.obter_produto(produto_id)
                 if p:
                     while True:
                         op_editar = menu_produtos_editar()
                         match op_editar:
                             case '1':
-                                p.nome = input('| Novo nome: ')
+                                executar(lambda: setattr(p, 'nome', input('| Novo nome: ')))
                             case '2':
-                                p.categoria = input('| Nova categoria: ')
+                                executar(lambda: setattr(p, 'categoria', input('| Nova categoria: ')))
                             case '3':
-                                p.marca = input('| Nova marca: ')
+                                executar(lambda: setattr(p, 'marca', input('| Nova marca: ')))
                             case '4':
-                                p.n_serie = input('| Novo número de série: ')
+                                executar(lambda: setattr(p, 'n_serie', input('| Novo número de série: ')))
                             case '0':
-                                produto_repo.editar_produto(produto_id, p.nome, p.categoria, p.marca, p.n_serie)
+                                executar(lambda: produto_repo.editar_produto(produto_id, p.nome, p.categoria, p.marca, p.n_serie))
                                 break
                             case _:
                                 print('| Opção incorrecta!')
@@ -244,12 +249,12 @@ def submenu_produtos():
             case '3':
                 produto_repo.listar_produtos()
                 input('| Clica enter para continuares...|')
+
             case '4':
                 produto_repo.listar_produtos()
-                p_id = int(input('| ID do produto a eliminar: '))
-                op_eliminar = input(f'| Tens a certeza? (sim/nao): ')
-                if op_eliminar.lower() == 'sim':
-                    produto_repo.eliminar_produto(p_id)
+                p_id = input_inteiro('| ID do produto a eliminar: ')
+                if confirmar('| Tens a certeza? (sim/nao): '):
+                    executar(lambda: produto_repo.eliminar_produto(p_id))
                 else:
                     print(f'| Produto {p_id} não foi eliminado!')
 
@@ -263,37 +268,40 @@ def submenu_tickets_admin():
         op = menu_tickets_admin()
         match op:
             case '1':
-                user_repo.listar_users()
-                user_id = int(input('| ID do user: '))
-                tecnico_id = int(input('| ID do técnico: '))
-                produto_repo.listar_produtos()
-                produto_id = int(input('| ID do produto: '))
-                categoria_repo.listar_categorias()
-                categoria_id = int(input('| ID da categoria: '))
-                prioridade = input('| Prioridade (Alta/Média/Baixa): ')
-                descricao = input('| Descrição do problema: ')
-                ticket_repo.abrir_ticket(user_id, tecnico_id, produto_id, categoria_id, prioridade, descricao)
+                def criar():
+                    user_repo.listar_users()
+                    user_id = input_inteiro('| ID do user: ')
+                    tecnico_id = input_inteiro('| ID do técnico: ')
+                    produto_repo.listar_produtos()
+                    produto_id = input_inteiro('| ID do produto: ')
+                    categoria_repo.listar_categorias()
+                    categoria_id = input_inteiro('| ID da categoria: ')
+                    prioridade = input('| Prioridade (Alta/Média/Baixa): ')
+                    descricao = input('| Descrição do problema: ')
+                    ticket_repo.abrir_ticket(user_id, tecnico_id, produto_id, categoria_id, prioridade, descricao)
+                executar(criar)
+                input('| Clica enter para continuares...|')
 
             case '2':
                 ticket_repo.listar_tickets()
-                ticket_id = int(input('| ID do ticket a editar: '))
+                ticket_id = input_inteiro('| ID do ticket a editar: ')
                 t = ticket_repo.obter_ticket(ticket_id)
                 if t:
                     while True:
                         op_editar = menu_tickets_editar()
                         match op_editar:
                             case '1':
-                                t.tecnico_id = int(input('| Novo ID do técnico: '))
+                                executar(lambda: setattr(t, 'tecnico_id', input_inteiro('| Novo ID do técnico: ')))
                             case '2':
-                                t.produto_id = int(input('| Novo ID do produto: '))
+                                executar(lambda: setattr(t, 'produto_id', input_inteiro('| Novo ID do produto: ')))
                             case '3':
-                                t.categoria_id = int(input('| Novo ID da categoria: '))
+                                executar(lambda: setattr(t, 'categoria_id', input_inteiro('| Novo ID da categoria: ')))
                             case '4':
-                                t.prioridade = input('| Nova prioridade: ')
+                                executar(lambda: setattr(t, 'prioridade', input('| Nova prioridade: ')))
                             case '5':
-                                t.descricao = input('| Nova descrição: ')
+                                executar(lambda: setattr(t, 'descricao', input('| Nova descrição: ')))
                             case '0':
-                                ticket_repo.editar_ticket(ticket_id, t.tecnico_id, t.produto_id, t.categoria_id, t.prioridade, t.descricao)
+                                executar(lambda: ticket_repo.editar_ticket(ticket_id, t.tecnico_id, t.produto_id, t.categoria_id, t.prioridade, t.descricao))
                                 break
                             case _:
                                 print('| Opção incorrecta!')
@@ -301,22 +309,22 @@ def submenu_tickets_admin():
             case '3':
                 ticket_repo.listar_tickets()
                 input('| Clica enter para continuares...|')
+
             case '4':
                 ticket_repo.listar_tickets()
-                t_id = int(input('| ID do ticket a fechar: '))
-                ticket_repo.fechar_ticket(t_id)
+                t_id = input_inteiro('| ID do ticket a fechar: ')
+                executar(lambda: ticket_repo.fechar_ticket(t_id))
 
             case '5':
                 ticket_repo.listar_tickets()
-                t_id = int(input('| ID do ticket a reabrir: '))
-                ticket_repo.reabrir_ticket(t_id)
+                t_id = input_inteiro('| ID do ticket a reabrir: ')
+                executar(lambda: ticket_repo.reabrir_ticket(t_id))
 
             case '6':
                 ticket_repo.listar_tickets()
-                t_id = int(input('| ID do ticket a eliminar: '))
-                op_eliminar = input(f'| Tens a certeza? (sim/nao): ')
-                if op_eliminar.lower() == 'sim':
-                    ticket_repo.eliminar_ticket(t_id)
+                t_id = input_inteiro('| ID do ticket a eliminar: ')
+                if confirmar('| Tens a certeza? (sim/nao): '):
+                    executar(lambda: ticket_repo.eliminar_ticket(t_id))
                 else:
                     print(f'| Ticket {t_id} não foi eliminado!')
 
@@ -330,52 +338,29 @@ def submenu_tickets_tecnico(user_logado):
         op = menu_tickets_tecnico()
         match op:
             case '1':
-                ticket_repo.listar_tickets()
-                input('| Clica enter para continuares...|')
+                ticket_repo.listar_tickets_por_tecnico(user_logado.user_id)
+                input('| Carrega Enter para continuar...')
+
             case '2':
-                ticket_repo.listar_tickets()
-                ticket_id = int(input('| ID do ticket a editar: '))
-                t = ticket_repo.obter_ticket(ticket_id)
-                if t:
-                    while True:
-                        op_editar = menu_tickets_editar()
-                        match op_editar:
-                            case '1':
-                                t.tecnico_id = int(input('| Novo ID do técnico: '))
-                            case '2':
-                                t.produto_id = int(input('| Novo ID do produto: '))
-                            case '3':
-                                t.categoria_id = int(input('| Novo ID da categoria: '))
-                            case '4':
-                                t.prioridade = input('| Nova prioridade: ')
-                            case '5':
-                                t.descricao = input('| Nova descrição: ')
-                            case '0':
-                                ticket_repo.editar_ticket(ticket_id, t.tecnico_id, t.produto_id, t.categoria_id, t.prioridade, t.descricao)
-                                break
-                            case _:
-                                print('| Opção incorrecta!')
+                ticket_repo.listar_tickets_por_tecnico(user_logado.user_id)
+                t_id = input_inteiro('| ID do ticket a fechar: ')
+                executar(lambda: ticket_repo.fechar_ticket(t_id))
 
             case '3':
-                ticket_repo.listar_tickets()
-                t_id = int(input('| ID do ticket a fechar: '))
-                ticket_repo.fechar_ticket(t_id)
+                ticket_repo.listar_tickets_por_tecnico(user_logado.user_id)
+                t_id = input_inteiro('| ID do ticket a reabrir: ')
+                executar(lambda: ticket_repo.reabrir_ticket(t_id))
 
             case '4':
-                ticket_repo.listar_tickets()
-                t_id = int(input('| ID do ticket a reabrir: '))
-                ticket_repo.reabrir_ticket(t_id)
+                ticket_repo.listar_tickets_por_tecnico(user_logado.user_id)
+                t_id = input_inteiro('| ID do ticket a devolver: ')
+                observacao = input('| Observação para o user: ')
+                executar(lambda: ticket_repo.devolver_ticket(t_id, observacao))
 
             case '5':
                 ticket_repo.listar_tickets()
-                t_id = int(input('| ID do ticket a devolver: '))
-                observacao = input('| Observação para o user: ')
-                ticket_repo.devolver_ticket(t_id, observacao)
+                input('| Clica enter para continuares...|')
 
-            case '6':
-                ticket_repo.listar_tickets_por_tecnico(user_logado.user_id)
-                input('| Carrega Enter para continuar...')
-                
             case '0':
                 break
             case _:
@@ -386,20 +371,21 @@ def submenu_tickets_user(user_logado):
         op = menu_principal_user()
         match op:
             case '1':
-                produto_repo.listar_produtos()
-                produto_id = int(input('| ID do produto: '))
-                categoria_repo.listar_categorias()
-                categoria_id = int(input('| ID da categoria: '))
-                prioridade = input('| Prioridade (Alta/Média/Baixa): ')
-                descricao = input('| Descrição do problema: ')
-                # ← já não pede tecnico_id, vai buscar automaticamente
-                tecnico_id = ticket_repo.obter_tecnico_disponivel()
-                if tecnico_id:
-                    ticket_repo.abrir_ticket(user_logado.user_id, tecnico_id, produto_id, categoria_id, prioridade, descricao)
-                else:
-                    print('| Não foi possível atribuir técnico — tenta mais tarde!')
+                def criar():
+                    produto_repo.listar_produtos()
+                    produto_id = input_inteiro('| ID do produto: ')
+                    categoria_repo.listar_categorias()
+                    categoria_id = input_inteiro('| ID da categoria: ')
+                    prioridade = input('| Prioridade (Alta/Média/Baixa): ')
+                    descricao = input('| Descrição do problema: ')
+                    tecnico_id = ticket_repo.obter_tecnico_disponivel()
+                    if tecnico_id:
+                        ticket_repo.abrir_ticket(user_logado.user_id, tecnico_id, produto_id, categoria_id, prioridade, descricao)
+                    else:
+                        print('| Não foi possível atribuir técnico — tenta mais tarde!')
+                executar(criar)
                 input('| Carrega Enter para continuar...')
-                
+
             case '2':
                 ticket_repo.listar_tickets_por_user(user_logado.user_id)
                 input('| Clica enter para continuares...|')
@@ -415,28 +401,33 @@ def submenu_departamentos():
         op = menu_departamentos()
         match op:
             case '1':
-                nome = input('| Nome do departamento: ')
-                descricao = input('| Descrição: ')
-                departamento_repo.criar_departamento(nome, descricao)
+                def criar():
+                    nome = input('| Nome do departamento: ')
+                    descricao = input('| Descrição: ')
+                    departamento_repo.criar_departamento(nome, descricao)
+                executar(criar)
+                input('| Clica enter para continuares...|')
 
             case '2':
                 departamento_repo.listar_departamentos()
-                d_id = int(input('| ID do departamento a editar: '))
+                d_id = input_inteiro('| ID do departamento a editar: ')
                 d = departamento_repo.obter_departamento(d_id)
                 if d:
-                    d.nome = input('| Novo nome: ')
-                    d.descricao = input('| Nova descrição: ')
-                    departamento_repo.editar_departamento(d_id, d.nome, d.descricao)
+                    def editar():
+                        d.nome = input('| Novo nome: ')
+                        d.descricao = input('| Nova descrição: ')
+                        departamento_repo.editar_departamento(d_id, d.nome, d.descricao)
+                    executar(editar)
 
             case '3':
                 departamento_repo.listar_departamentos()
                 input('| Clica enter para continuares...|')
+
             case '4':
                 departamento_repo.listar_departamentos()
-                d_id = int(input('| ID do departamento a eliminar: '))
-                op_eliminar = input(f'| Tens a certeza? (sim/nao): ')
-                if op_eliminar.lower() == 'sim':
-                    departamento_repo.eliminar_departamento(d_id)
+                d_id = input_inteiro('| ID do departamento a eliminar: ')
+                if confirmar('| Tens a certeza? (sim/nao): '):
+                    executar(lambda: departamento_repo.eliminar_departamento(d_id))
                 else:
                     print(f'| Departamento {d_id} não foi eliminado!')
 
@@ -450,28 +441,33 @@ def submenu_categorias():
         op = menu_categorias()
         match op:
             case '1':
-                nome = input('| Nome da categoria: ')
-                descricao = input('| Descrição: ')
-                categoria_repo.criar_categoria(nome, descricao)
+                def criar():
+                    nome = input('| Nome da categoria: ')
+                    descricao = input('| Descrição: ')
+                    categoria_repo.criar_categoria(nome, descricao)
+                executar(criar)
+                input('| Clica enter para continuares...|')
 
             case '2':
                 categoria_repo.listar_categorias()
-                c_id = int(input('| ID da categoria a editar: '))
+                c_id = input_inteiro('| ID da categoria a editar: ')
                 c = categoria_repo.obter_categoria(c_id)
                 if c:
-                    c.nome = input('| Novo nome: ')
-                    c.descricao = input('| Nova descrição: ')
-                    categoria_repo.editar_categoria(c_id, c.nome, c.descricao)
+                    def editar():
+                        c.nome = input('| Novo nome: ')
+                        c.descricao = input('| Nova descrição: ')
+                        categoria_repo.editar_categoria(c_id, c.nome, c.descricao)
+                    executar(editar)
 
             case '3':
                 categoria_repo.listar_categorias()
                 input('| Clica enter para continuares...|')
+
             case '4':
                 categoria_repo.listar_categorias()
-                c_id = int(input('| ID da categoria a eliminar: '))
-                op_eliminar = input(f'| Tens a certeza? (sim/nao): ')
-                if op_eliminar.lower() == 'sim':
-                    categoria_repo.eliminar_categoria(c_id)
+                c_id = input_inteiro('| ID da categoria a eliminar: ')
+                if confirmar('| Tens a certeza? (sim/nao): '):
+                    executar(lambda: categoria_repo.eliminar_categoria(c_id))
                 else:
                     print(f'| Categoria {c_id} não foi eliminada!')
 
@@ -502,7 +498,7 @@ def arrancar(user_logado):
                     submenu_categorias()
                 case '0':
                     print('| Programa terminado!')
-                    print('| Caso queiras alterar, inicia o programa novamente, até breve!')                    
+                    print('| Caso queiras alterar, inicia o programa novamente, até breve!')
                     break
                 case _:
                     print('| Opção inválida!')

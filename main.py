@@ -6,4 +6,3 @@ user_logado = login()
 
 if user_logado:
   arrancar(user_logado)
-  

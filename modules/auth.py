@@ -16,6 +16,7 @@ def login():
         
         if u and u.password == password:
             print(f'| Bem-vindo/a, {u.nome}!')
+            input('| Clica enter para continuares...')
             return u
         else:
             tentativas -= 1
