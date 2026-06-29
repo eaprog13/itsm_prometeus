@@ -11,7 +11,7 @@ def criar_user_valido(**overrides):
         'contacto': '910000005',
         'tipo': 'admin',
         'departamento_id': 1,
-        'turno': 'Manhã',
+        'turno': 'manha',
         'password': 'password123',
     }
     dados.update(overrides)
@@ -67,7 +67,7 @@ def test_turno_invalido_levanta_erro():
     with pytest.raises(ValueError):
         criar_user_valido(turno='Madrugada')
 
-@pytest.mark.parametrize('turno_valido', ['Manhã', 'Tarde', 'Noite'])
+@pytest.mark.parametrize('turno_valido', ['manha', 'tarde', 'noite'])
 def test_turnos_validos_sao_aceites(turno_valido):
     u = criar_user_valido(turno=turno_valido)
     assert u.turno == turno_valido

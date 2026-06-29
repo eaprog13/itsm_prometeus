@@ -51,7 +51,7 @@ class User:
 
     @turno.setter
     def turno(self, valor):
-        turnos_validos = ['Manhã', 'Tarde', 'Noite']
+        turnos_validos = ['manha', 'tarde', 'noite']
         if valor not in turnos_validos:
             raise ValueError(f'| Erro: turno inválido — deve ser um de {turnos_validos}')
         self.__turno = valor

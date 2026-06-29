@@ -158,7 +158,7 @@ def submenu_users():
                     tipo = input('| Tipo (admin/tecnico/user): ')
                     departamento_repo.listar_departamentos()
                     departamento_id = input_inteiro('| ID do departamento: ')
-                    turno = input('| Turno (Manha/Tarde/Noite): ')
+                    turno = input('| Turno (manha/tarde/noite): ')
                     password = input('| Password: ')
                     user_repo.criar_user(nome, email, contacto, tipo, departamento_id, turno, password)
                 executar(criar)
