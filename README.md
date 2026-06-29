@@ -1,110 +1,227 @@
-# Plataforma de Gestão de Infraestruturas Informáticas
+# ITSM Prometeus
 
-## Introdução
+Aplicação de consola para gestão de serviços de IT (ITSM — IT Service Management), desenvolvida em Python com persistência em PostgreSQL.
 
-Este projeto consiste no desenvolvimento de uma plataforma para gestão de infraestruturas informáticas de uma organização.
-
-O sistema permite:
-
-- Registo e gestão de ativos (hardware e software)
-- Criação e gestão de tickets de suporte
-- Atribuição automática de técnicos com base em carga de trabalho, competências e disponibilidade
-
-O objetivo é criar uma solução eficiente para centralizar a gestão de recursos e problemas técnicos.
+Permite a gestão de users, produtos, departamentos, categorias e tickets de suporte, com autenticação e permissões diferenciadas por perfil (Admin, Técnico, User).
 
 ---
 
-## Objetivo do Projeto
+## Funcionalidades
 
-Criar uma aplicação que permita:
-
-- Gerir utilizadores do sistema
-- Gerir inventário de hardware e software
-- Criar, atribuir e encerrar tickets de suporte
-- Otimizar a distribuição de trabalho entre técnicos
-
----
-
-## Stack Tecnológico
-
-### Backend
-- Python 3.14
-- Flask 3.1.2
-- 
-
-### Base de Dados
-- SQLite/ PostgreSQL 
-
-### Frontend
-- HTML5
-- CSS3
-- JavaScript
-- Bootstrap
-
-### Controlo de Versões
-- Git
-- GitHub
+- **Autenticação** por email e password
+- **Gestão de Users** — criar, editar, consultar e eliminar (Admin)
+- **Gestão de Produtos** — criar, editar, consultar e eliminar (Admin)
+- **Gestão de Departamentos e Categorias** — configuração do sistema (Admin)
+- **Gestão de Tickets**:
+  - Abertura de tickets por Users, com **atribuição automática** ao técnico com menos tickets activos
+  - **Fila de trabalho por técnico**, ordenada por prioridade (Alta → Média → Baixa)
+  - Fechar, reabrir e devolver tickets (com observação para o user)
+- **Validação de dados** através de encapsulamento (`@property`) em todos os modelos
+- **Tratamento de erros** centralizado, sem crashes em inputs inválidos
+- **Testes automatizados** com `pytest` para as regras de validação
 
 ---
 
-## Requisitos Funcionais
+## Perfis e Permissões
 
-### Gestão de Utilizadores
-- Criar utilizadores
-- Gerir perfis de utilizador
-
-### Gestão de Produtos
-- Listar hardware
-- Listar software
-- Organizar inventário de ativos
-
-### Gestão de Tickets
-- Criar tickets de suporte
-- Encerrar tickets
-- Colocar tickets em fila de espera
-- Atribuir automaticamente técnicos aos tickets com base em:
-  - Carga de trabalho
-  - Competências
-  - Disponibilidade
+| Acção                             | Admin         | Técnico               | User |
+|---|---|---|---|
+| Gerir departamentos e categorias  | ✅            | ❌                   | ❌ |
+| Gerir users                       | ✅            | ❌                   | ❌ |
+| Gerir produtos                    | ✅            | ❌                   | ❌ |
+| Criar ticket                      | ✅            | ❌                   | ✅ |
+| Consultar tickets                 | ✅ (todos)    | ✅ (próprios)        | ✅ (próprios) |
+| Editar / Fechar / Reabrir ticket  | ✅            | ✅                   | ❌ |
+| Devolver ticket (com observação)  | ❌            | ✅                   | ❌ |
+| Eliminar ticket                   | ✅            | ❌                   | ❌ |
 
 ---
 
-## Requisitos Não-Funcionais
+## Arquitectura
 
-- O sistema deve responder num tempo aceitável (entre 5 segundos e 1 minuto)
-- A base de dados deve garantir integridade e consistência dos dados
-- Deve suportar múltiplos utilizadores em simultâneo
-- Deve permitir possibilidade de backup da base de dados
+O projecto segue uma arquitectura em camadas, separando responsabilidades:
+
+```
+itsm_prometeus/
+│
+├── main.py                      # Ponto de entrada da aplicação
+├── seed.py                      # Script de seeding (dados de teste)
+├── ddl.sql                      # Script de criação das tabelas (DDL)
+├── requirements.txt             # Dependências do projecto
+│
+├── modules/
+│   ├── ligar_db.py               # Ligação à base de dados PostgreSQL
+│   ├── auth.py                   # Lógica de autenticação (login)
+│   ├── erros.py                  # Tratamento de erros e inputs seguros
+│   ├── menus.py                   # Interface de consola (menus por perfil)
+│   │
+│   ├── users.py                  # Modelo User (com encapsulamento)
+│   ├── produtos.py               # Modelo Produto
+│   ├── tickets.py                # Modelo Ticket
+│   ├── categorias.py             # Modelo Categoria
+│   ├── departamentos.py          # Modelo Departamento
+│   │
+│   └── repositorios/             # Camada DAO — acesso à base de dados
+│       ├── user_repo.py
+│       ├── produto_repo.py
+│       ├── ticket_repo.py
+│       ├── categoria_repo.py
+│       └── departamento_repo.py
+│
+└── tests/                        # Testes automatizados (pytest)
+    ├── test_users.py
+    └── test_tickets.py
+```
+
+### Camadas
+
+| Camada | Responsabilidade |
+|---|---|
+| **Modelos** (`modules/*.py`) | Representam os dados e validam-nos via `@property` |
+| **Repositórios** (`modules/repositorios/`) | Acesso à base de dados (CRUD) — padrão DAO |
+| **Menus** (`modules/menus.py`) | Interface com o utilizador, por perfil |
+| **Auth** (`modules/auth.py`) | Autenticação do user |
+| **Erros** (`modules/erros.py`) | Inputs seguros e tratamento de excepções |
 
 ---
 
-## Diagramas
+## Modelo de Dados
 
-### Modelo Entidade-Relacionamento
-*(A inserir posteriormente)*  
-Diagrama que representa as relações entre utilizadores, tickets e produtos.
+```
+departamentos ──< users >── tickets >── produtos
+                              │
+                          categorias
+```
 
-### Diagrama de Classes
-*(A inserir posteriormente)*  
-Representação da lógica do domínio e estrutura das classes principais do sistema.
+| Tabela | Descrição |
+|---|---|
+| `departamentos` | Departamentos da organização (IT, Suporte, RH, ...) |
+| `categorias` | Categorias de tickets (Hardware, Software, Rede, ...) |
+| `users` | Utilizadores do sistema, com `tipo` (admin/tecnico/user) |
+| `produtos` | Equipamentos e produtos passíveis de gerar tickets |
+| `tickets` | Pedidos de suporte, ligados a user, técnico, produto e categoria |
+
+O script de criação das tabelas está em [`ddl.sql`](./ddl.sql).
 
 ---
 
-## Stack Tecnológico (Resumo)
+## Pré-requisitos
 
-- Backend: Python + Flask  
-- Base de Dados: SQLite
-- Frontend: HTML, CSS, JavaScript + Bootstrap  
-- Versionamento: Git + GitHub  
+- Python 3.10 ou superior
+- PostgreSQL instalado e em execução
+- `pip` para gestão de pacotes
 
 ---
 
-## Conclusão
+## Instalação
 
-Este projeto propõe a criação de uma aplicação para gestão de infraestruturas informáticas, permitindo a gestão de utilizadores, tickets e ativos (hardware e software).
+**1. Clonar o repositório e criar o ambiente virtual**
+```bash
+git clone <url-do-repositorio>
+cd itsm_prometeus
+python -m venv venv
+```
 
-Foi escolhida a stack Python + Flask devido à sua simplicidade e proximidade com a sintaxe em aprendizagem. O PostgreSQL foi selecionado por estar alinhado com o contexto académico da unidade de administração de bases de dados.
+**2. Activar o ambiente virtual**
+```bash
+# Windows
+venv\Scripts\activate
 
-Inicialmente será utilizado Bootstrap para o frontend, com o objetivo de criar uma interface simples e funcional. Caso necessário, poderá ser substituído por uma aplicação em consola.
+# Linux / macOS
+source venv/bin/activate
+```
 
-Este README representa uma primeira abordagem à definição de requisitos funcionais, não funcionais e arquitetura do sistema.
+**3. Instalar as dependências**
+```bash
+pip install -r requirements.txt
+```
+
+**4. Criar a base de dados**
+
+No PostgreSQL (via pgAdmin ou `psql`), cria uma base de dados chamada `itsm_prometeus` e corre o script:
+```bash
+psql -U postgres -d itsm_prometeus -f ddl.sql
+```
+
+**5. Configurar a ligação à base de dados**
+
+Edita `modules/ligar_db.py` com as tuas credenciais:
+```python
+import psycopg
+
+def get_connection():
+    return psycopg.connect(
+        host="localhost",
+        dbname="itsm_prometeus",
+        user="postgres",
+        password="a_tua_password"
+    )
+```
+
+**6. Popular a base de dados com dados de teste (opcional)**
+```bash
+python seed.py
+```
+
+---
+
+## Como executar
+
+```bash
+python main.py
+```
+
+### Credenciais de teste (após correr o `seed.py`)
+
+| Perfil | Email | Password |
+|---|---|---|
+| Admin | ana.silva@itsm.pt | admin123 |
+| Técnico | bruno.costa@itsm.pt | tecnico123 |
+| Técnico | carla.mendes@itsm.pt | tecnico456 |
+| User | david.lopes@itsm.pt | user123 |
+| User | eva.martins@itsm.pt | user456 |
+
+---
+
+## Testes Automatizados
+
+O projecto inclui testes com `pytest` para validar as regras de encapsulamento dos modelos `User` e `Ticket`.
+
+```bash
+pytest tests/ -v
+```
+
+Os testes cobrem:
+- Validação de email, contacto, tipo, turno e password (`User`)
+- Validação de estado e prioridade (`Ticket`)
+- Comportamento correcto na criação e edição de objectos
+
+---
+
+## Tratamento de Erros
+
+A aplicação está protegida contra:
+- **Inputs inválidos** (ex: letras onde se espera um número) — através de `input_inteiro()`
+- **Erros de validação dos modelos** (`ValueError`) — através de `executar()`, que apanha o erro e mantém o programa em execução
+- **Erros inesperados** (ex: falhas de ligação à base de dados) — apanhados genericamente, sem crash
+
+Toda esta lógica está centralizada em `modules/erros.py`.
+
+---
+
+## Decisões de Arquitectura
+
+- **PostgreSQL com `psycopg[binary]`** em vez de `psycopg2`, devido a incompatibilidades do `psycopg2` com Python 3.14
+- **`departamento` separado de `tipo`** no modelo `User` — o primeiro representa a unidade organizacional, o segundo o nível de permissões no sistema
+- **Atribuição automática de técnicos** baseada no menor número de tickets activos, para distribuição equilibrada de carga de trabalho
+- **Fila por prioridade** implementada com `CASE` em SQL, evitando lógica de ordenação no lado do Python
+- **Encapsulamento nos modelos** (`@property`) garante que nenhum dado inválido chega à base de dados quando os objectos são correctamente construídos antes da chamada ao repositório
+
+---
+
+## Possíveis Melhorias Futuras
+
+- Hashing de passwords (actualmente armazenadas em texto simples)
+- Migração da interface de consola para uma API REST (Flask/FastAPI)
+- Relatórios e métricas (tickets por categoria, tempo médio de resolução)
+- Sistema de notificações para técnicos com novos tickets atribuídos

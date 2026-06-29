@@ -4,12 +4,12 @@ class User:
     def __init__(self, user_id, nome, email, contacto, tipo, departamento_id, turno, password, criado_em=None):
         self.user_id = user_id
         self.nome = nome
-        self.__email = email
-        self.__contacto = contacto
-        self.__tipo = tipo
+        self.email = email
+        self.contacto = contacto
+        self.tipo = tipo
         self.departamento_id = departamento_id
-        self.__turno = turno
-        self.__password = password
+        self.turno = turno
+        self.password = password
         self.criado_em = criado_em or datetime.now()
 
     # ── ENCAPSULAMENTO ──────────────────────────────

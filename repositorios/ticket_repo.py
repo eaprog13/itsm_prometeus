@@ -1,7 +1,22 @@
 from modules.ligar_db import get_connection
 from modules.tickets import Ticket
 
+
 def abrir_ticket(user_id, tecnico_id, produto_id, categoria_id, prioridade, descricao):
+    """
+    Cria um novo ticket na base de dados.
+
+    Args:
+        user_id (int): ID do user que abriu o ticket.
+        tecnico_id (int | None): ID do técnico atribuído (pode ser None).
+        produto_id (int): ID do produto associado ao problema.
+        categoria_id (int): ID da categoria do problema.
+        prioridade (str): Prioridade do ticket — 'Alta', 'Média' ou 'Baixa'.
+        descricao (str): Descrição do problema reportado.
+
+    Returns:
+        None. Imprime uma mensagem de confirmação com o ID gerado.
+    """
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
@@ -13,7 +28,17 @@ def abrir_ticket(user_id, tecnico_id, produto_id, categoria_id, prioridade, desc
     conn.close()
     print(f'| Ticket {ticket_id} aberto com sucesso!')
 
+
 def listar_tickets():
+    """
+    Lista todos os tickets do sistema, com os nomes de user, técnico,
+    produto e categoria já resolvidos (em vez dos IDs).
+
+    Returns:
+        list[tuple]: Lista de linhas devolvidas pela base de dados.
+        Cada linha contém (id, user, tecnico, produto, categoria,
+        prioridade, descricao, estado, observacao, criado_em).
+    """
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("""
@@ -44,7 +69,17 @@ def listar_tickets():
         print(f'| Id: {row[0]}\n | User: {row[1]}\n | Técnico: {row[2]}\n | Produto: {row[3]}\n | Categoria: {row[4]}\n | Prioridade: {row[5]}\n | Descrição: {row[6]}\n | Estado: {row[7]}\n | Observação: {row[8]}\n | Criado em: {row[9]:%d/%m/%Y %H:%M:%S}\n')
     return rows
 
+
 def obter_ticket(ticket_id):
+    """
+    Procura um ticket pelo seu ID.
+
+    Args:
+        ticket_id (int): ID do ticket a procurar.
+
+    Returns:
+        Ticket | None: O objecto Ticket se encontrado, ou None caso contrário.
+    """
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT ticket_id, user_id, tecnico_id, produto_id, categoria_id, prioridade, descricao, estado, observacao, criado_em FROM tickets WHERE ticket_id = %s", (ticket_id,))
@@ -55,7 +90,22 @@ def obter_ticket(ticket_id):
     print(f'| Ticket {ticket_id} não encontrado!')
     return None
 
+
 def editar_ticket(ticket_id, tecnico_id, produto_id, categoria_id, prioridade, descricao):
+    """
+    Actualiza os dados de um ticket existente.
+
+    Args:
+        ticket_id (int): ID do ticket a editar.
+        tecnico_id (int): Novo ID do técnico atribuído.
+        produto_id (int): Novo ID do produto.
+        categoria_id (int): Novo ID da categoria.
+        prioridade (str): Nova prioridade.
+        descricao (str): Nova descrição.
+
+    Returns:
+        None. Imprime uma mensagem de confirmação.
+    """
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
@@ -66,7 +116,17 @@ def editar_ticket(ticket_id, tecnico_id, produto_id, categoria_id, prioridade, d
     conn.close()
     print(f'| Ticket {ticket_id} actualizado com sucesso!')
 
+
 def fechar_ticket(ticket_id):
+    """
+    Marca um ticket como 'fechado'.
+
+    Args:
+        ticket_id (int): ID do ticket a fechar.
+
+    Returns:
+        None. Imprime uma mensagem de confirmação.
+    """
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("UPDATE tickets SET estado='fechado' WHERE ticket_id=%s", (ticket_id,))
@@ -74,7 +134,17 @@ def fechar_ticket(ticket_id):
     conn.close()
     print(f'| Ticket {ticket_id} fechado com sucesso!')
 
+
 def reabrir_ticket(ticket_id):
+    """
+    Marca um ticket como 'aberto' novamente.
+
+    Args:
+        ticket_id (int): ID do ticket a reabrir.
+
+    Returns:
+        None. Imprime uma mensagem de confirmação.
+    """
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("UPDATE tickets SET estado='aberto' WHERE ticket_id=%s", (ticket_id,))
@@ -82,15 +152,37 @@ def reabrir_ticket(ticket_id):
     conn.close()
     print(f'| Ticket {ticket_id} reaberto com sucesso!')
 
+
 def eliminar_ticket(ticket_id):
+    """
+    Elimina um ticket da base de dados pelo seu ID.
+
+    Args:
+        ticket_id (int): ID do ticket a eliminar.
+
+    Returns:
+        None. Imprime uma mensagem de confirmação.
+    """
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("DELETE FROM tickets WHERE ticket_id=%s", (ticket_id,))
     conn.commit()
     conn.close()
     print(f'| Ticket {ticket_id} eliminado com sucesso!')
-    
+
+
 def devolver_ticket(ticket_id, observacao):
+    """
+    Marca um ticket como 'devolvido' ao user, com uma observação
+    do técnico a explicar o motivo (ex: falta de informação).
+
+    Args:
+        ticket_id (int): ID do ticket a devolver.
+        observacao (str): Observação do técnico para o user.
+
+    Returns:
+        None. Imprime uma mensagem de confirmação.
+    """
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
@@ -101,8 +193,18 @@ def devolver_ticket(ticket_id, observacao):
     conn.close()
     print(f'| Ticket {ticket_id} devolvido com sucesso!')
 
+
 def listar_tickets_por_user(user_id):
-    print(f'| A procurar tickets do user_id: {user_id}')  # ← debug temporário
+    """
+    Lista os tickets criados por um user específico.
+
+    Args:
+        user_id (int): ID do user cujos tickets se quer consultar.
+
+    Returns:
+        list[tuple]: Lista de linhas devolvidas pela base de dados,
+        com os nomes de técnico, produto e categoria já resolvidos.
+    """
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("""
@@ -125,7 +227,6 @@ def listar_tickets_por_user(user_id):
         WHERE t.user_id = %s
     """, (user_id,))
     rows = cursor.fetchall()
-    print(f'| Tickets encontrados: {len(rows)}')  # ← debug temporário
     conn.close()
     if not rows:
         print('| Não tens tickets registados!')
@@ -135,7 +236,16 @@ def listar_tickets_por_user(user_id):
         print(f'| Id: {row[0]}\n | User: {row[1]}\n | Técnico: {row[2]}\n | Produto: {row[3]}\n | Categoria: {row[4]}\n | Prioridade: {row[5]}\n | Descrição: {row[6]}\n | Estado: {row[7]}\n | Observação: {row[8]}\n | Criado em: {row[9]:%d/%m/%Y %H:%M:%S}\n')
     return rows
 
+
 def obter_tecnico_disponivel():
+    """
+    Encontra o técnico com menos tickets activos (estado 'aberto'
+    ou 'devolvido'), para distribuição automática de carga de trabalho.
+
+    Returns:
+        int | None: O user_id do técnico escolhido, ou None se não
+        houver nenhum técnico registado no sistema.
+    """
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("""
@@ -157,7 +267,20 @@ def obter_tecnico_disponivel():
     print('| Não há técnicos disponíveis!')
     return None
 
+
 def listar_tickets_por_tecnico(tecnico_id):
+    """
+    Lista a fila de trabalho de um técnico — tickets activos
+    (estado 'aberto' ou 'devolvido') ordenados por prioridade
+    (Alta primeiro) e depois por data de criação (mais antigo primeiro).
+
+    Args:
+        tecnico_id (int): ID do técnico cuja fila se quer consultar.
+
+    Returns:
+        list[tuple]: Lista de linhas devolvidas pela base de dados,
+        já ordenadas por prioridade.
+    """
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("""
