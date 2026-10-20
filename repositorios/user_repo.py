@@ -1,4 +1,5 @@
 from modules.ligar_db import get_connection
+from modules.seguranca import e_hash, gerar_hash
 from modules.users import User
 
 
@@ -22,7 +23,7 @@ def criar_user(nome, email, contacto, tipo, departamento_id, turno, password):
     cursor = conn.cursor()
     cursor.execute(
         "INSERT INTO users (nome, email, contacto, tipo, departamento_id, turno, password) VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING user_id",
-        (nome, email, contacto, tipo, departamento_id, turno, password)
+        (nome, email, contacto, tipo, departamento_id, turno, gerar_hash(password))
     )
     user_id = cursor.fetchone()[0]
     conn.commit()
@@ -103,11 +104,13 @@ def editar_user(user_id, nome, email, contacto, tipo, departamento_id, turno, pa
         tipo (str): Novo tipo ('admin', 'tecnico' ou 'user').
         departamento_id (int): Novo ID do departamento.
         turno (str): Novo turno.
-        password (str): Nova password.
+        password (str): Nova password, ou o hash actual se não foi alterada.
 
     Returns:
         None. Imprime uma mensagem de confirmação.
     """
+    if not e_hash(password):
+        password = gerar_hash(password)
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
@@ -117,6 +120,22 @@ def editar_user(user_id, nome, email, contacto, tipo, departamento_id, turno, pa
     conn.commit()
     conn.close()
     print(f'| User {user_id} actualizado com sucesso!')
+
+
+def actualizar_hash_password(user_id, password):
+    """
+    Substitui uma password antiga em texto simples pelo seu hash — chamado
+    pelo login, sem mensagens para o ecrã.
+
+    Args:
+        user_id (int): ID do user.
+        password (str): Password em texto simples, já confirmada no login.
+    """
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("UPDATE users SET password=%s WHERE user_id=%s", (gerar_hash(password), user_id))
+    conn.commit()
+    conn.close()
 
 
 def eliminar_user(user_id):

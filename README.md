@@ -145,16 +145,25 @@ psql -U postgres -d itsm_prometeus -f ddl.sql
 
 **5. Configurar a ligação à base de dados**
 
-Edita `modules/ligar_db.py` com as tuas credenciais:
+As credenciais não ficam no código: define a password da base de dados numa variável de ambiente antes de correr o programa.
+```powershell
+$env:ITSM_DB_PASSWORD = "a_tua_password"   # PowerShell
+```
+```bash
+export ITSM_DB_PASSWORD="a_tua_password"   # bash
+```
+Opcionais (têm estes valores por omissão): `ITSM_DB_HOST=localhost`, `ITSM_DB_NAME=itsm_prometeus`, `ITSM_DB_USER=postgres`. O `modules/ligar_db.py` lê-as assim:
 ```python
+import os
+
 import psycopg
 
 def get_connection():
     return psycopg.connect(
-        host="localhost",
-        dbname="itsm_prometeus",
-        user="postgres",
-        password="a_tua_password"
+        host=os.environ.get("ITSM_DB_HOST", "localhost"),
+        dbname=os.environ.get("ITSM_DB_NAME", "itsm_prometeus"),
+        user=os.environ.get("ITSM_DB_USER", "postgres"),
+        password=os.environ.get("ITSM_DB_PASSWORD"),
     )
 ```
 
@@ -180,6 +189,8 @@ python main.py
 | Técnico | carla.mendes@itsm.pt | tecnico456 |
 | User | david.lopes@itsm.pt | user123 |
 | User | eva.martins@itsm.pt | user456 |
+
+As passwords são guardadas com hash (PBKDF2-SHA256 com salt, em `modules/seguranca.py`), nunca em texto simples. Contas antigas que ainda tenham a password em texto simples passam a hash no primeiro login.
 
 ---
 

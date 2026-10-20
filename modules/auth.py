@@ -1,3 +1,4 @@
+from modules.seguranca import e_hash, verificar_password
 from repositorios import user_repo
 
 
@@ -14,7 +15,10 @@ def login():
         
         u = user_repo.obter_user_por_email(email)
         
-        if u and u.password == password:
+        if u and verificar_password(password, u.password):
+            # Contas antigas ainda com a password em texto simples passam a hash.
+            if not e_hash(u.password):
+                user_repo.actualizar_hash_password(u.user_id, password)
             print(f'| Bem-vindo/a, {u.nome}!')
             input('| Clica enter para continuares...')
             return u
