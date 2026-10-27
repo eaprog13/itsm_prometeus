@@ -46,31 +46,33 @@ itsm_prometeus/
 │
 ├── main.py                      # Ponto de entrada da aplicação
 ├── seed.py                      # Script de seeding (dados de teste)
-├── ddl.sql                      # Script de criação das tabelas (DDL)
 ├── requirements.txt             # Dependências do projecto
 │
 ├── modules/
 │   ├── ligar_db.py               # Ligação à base de dados PostgreSQL
 │   ├── auth.py                   # Lógica de autenticação (login)
+│   ├── seguranca.py              # Hash e verificação de passwords (PBKDF2)
 │   ├── erros.py                  # Tratamento de erros e inputs seguros
-│   ├── menus.py                   # Interface de consola (menus por perfil)
+│   ├── menus.py                  # Interface de consola (menus por perfil)
 │   │
 │   ├── users.py                  # Modelo User (com encapsulamento)
 │   ├── produtos.py               # Modelo Produto
 │   ├── tickets.py                # Modelo Ticket
 │   ├── categorias.py             # Modelo Categoria
-│   ├── departamentos.py          # Modelo Departamento
-│   │
-│   └── repositorios/             # Camada DAO — acesso à base de dados
-│       ├── user_repo.py
-│       ├── produto_repo.py
-│       ├── ticket_repo.py
-│       ├── categoria_repo.py
-│       └── departamento_repo.py
+│   └── departamentos.py          # Modelo Departamento
+│
+├── repositorios/                 # Camada DAO — acesso à base de dados
+│   ├── ddl.sql                   # Script de criação das tabelas (DDL)
+│   ├── user_repo.py
+│   ├── produto_repo.py
+│   ├── ticket_repo.py
+│   ├── categoria_repo.py
+│   └── departamento_repo.py
 │
 └── tests/                        # Testes automatizados (pytest)
     ├── test_users.py
-    └── test_tickets.py
+    ├── test_tickets.py
+    └── test_seguranca.py
 ```
 
 ### Camadas
@@ -78,9 +80,9 @@ itsm_prometeus/
 | Camada | Responsabilidade |
 |---|---|
 | **Modelos** (`modules/*.py`) | Representam os dados e validam-nos via `@property` |
-| **Repositórios** (`modules/repositorios/`) | Acesso à base de dados (CRUD) — padrão DAO |
+| **Repositórios** (`repositorios/`) | Acesso à base de dados (CRUD) — padrão DAO |
 | **Menus** (`modules/menus.py`) | Interface com o utilizador, por perfil |
-| **Auth** (`modules/auth.py`) | Autenticação do user |
+| **Auth** (`modules/auth.py`, `modules/seguranca.py`) | Autenticação do user e hash das passwords |
 | **Erros** (`modules/erros.py`) | Inputs seguros e tratamento de excepções |
 
 ---
@@ -101,7 +103,7 @@ departamentos ──< users >── tickets >── produtos
 | `produtos` | Equipamentos e produtos passíveis de gerar tickets |
 | `tickets` | Pedidos de suporte, ligados a user, técnico, produto e categoria |
 
-O script de criação das tabelas está em [`ddl.sql`](./ddl.sql).
+O script de criação das tabelas está em [`repositorios/ddl.sql`](./repositorios/ddl.sql).
 
 ---
 
@@ -138,9 +140,10 @@ pip install -r requirements.txt
 
 **4. Criar a base de dados**
 
-No PostgreSQL (via pgAdmin ou `psql`), cria uma base de dados chamada `itsm_prometeus` e corre o script:
+No PostgreSQL (via pgAdmin ou `psql`), cria uma base de dados chamada `itsm_prometeus` e corre o script das tabelas:
 ```bash
-psql -U postgres -d itsm_prometeus -f ddl.sql
+createdb -U postgres itsm_prometeus
+psql -U postgres -d itsm_prometeus -f repositorios/ddl.sql
 ```
 
 **5. Configurar a ligação à base de dados**
@@ -167,10 +170,14 @@ def get_connection():
     )
 ```
 
-**6. Popular a base de dados com dados de teste (opcional)**
+**6. Popular a base de dados com dados de teste (opcional, mas recomendado)**
+
+Cria departamentos, categorias, produtos, tickets e as contas de teste abaixo. Correr uma só vez, na pasta do projecto:
 ```bash
 python seed.py
 ```
+
+Sem o seed, a base de dados fica sem nenhum user e não há com quem entrar: é preciso inserir pelo menos um admin à mão.
 
 ---
 
@@ -196,7 +203,7 @@ As passwords são guardadas com hash (PBKDF2-SHA256 com salt, em `modules/segura
 
 ## Testes Automatizados
 
-O projecto inclui testes com `pytest` para validar as regras de encapsulamento dos modelos `User` e `Ticket`.
+O projecto inclui testes com `pytest` para as regras de encapsulamento dos modelos `User` e `Ticket` e para o hash das passwords. Não precisam da base de dados.
 
 ```bash
 pytest tests/ -v
@@ -206,6 +213,7 @@ Os testes cobrem:
 - Validação de email, contacto, tipo, turno e password (`User`)
 - Validação de estado e prioridade (`Ticket`)
 - Comportamento correcto na criação e edição de objectos
+- Hash das passwords: o hash não contém a password, salt diferente em cada hash, password certa aceite e errada rejeitada, e as passwords antigas em texto simples continuam a funcionar (`seguranca.py`)
 
 ---
 
@@ -232,7 +240,6 @@ Toda esta lógica está centralizada em `modules/erros.py`.
 
 ## Possíveis Melhorias Futuras
 
-- Hashing de passwords (actualmente armazenadas em texto simples)
 - Migração da interface de consola para uma API REST (Flask/FastAPI)
 - Relatórios e métricas (tickets por categoria, tempo médio de resolução)
 - Sistema de notificações para técnicos com novos tickets atribuídos
